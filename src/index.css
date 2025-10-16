@@ -1,0 +1,68 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*Light mode autofill fix (default) */
+input:-webkit-autofill,
+textarea:-webkit-autofill,
+select:-webkit-autofill,
+input:-webkit-autofill:hover,
+textarea:-webkit-autofill:hover,
+select:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0 1000px #ffffff inset !important; /* light background */
+  -webkit-text-fill-color: #000000 !important;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+/* Dark mode autofill fix (scoped with Tailwind's dark class) */
+.dark input:-webkit-autofill,
+.dark textarea:-webkit-autofill,
+.dark select:-webkit-autofill,
+.dark input:-webkit-autofill:hover,
+.dark textarea:-webkit-autofill:hover,
+.dark select:-webkit-autofill:hover,
+.dark input:-webkit-autofill:focus,
+.dark textarea:-webkit-autofill:focus,
+.dark select:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0 1000px #1f2937 inset !important; /* Tailwind: bg-gray-800 */
+  -webkit-text-fill-color: #ffffff !important;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+
+
+/* Global font style */
+*{
+  font-family: "Geist", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+}
+
+*::-webkit-scrollbar {
+  display: none;
+}
+
+/* .custom-toast-container {
+  position: fixed !important;
+  top: 160px !important;
+  right: 10px !important;
+  bottom: auto !important;
+  left: auto !important;
+  z-index: 9999;
+} */
+
+
+/* This style for work order pdf generate page */
+
+@media print {
+  .pdf-a4 {
+    width: 794px;
+    min-height: 1123px;
+    margin: auto;
+  }
+}
+
