@@ -96,7 +96,7 @@ const Dashboard = () => {
 
 
 
-                        <Route path="/production" element={<ProductionManager />} />
+                        <Route path="/production" element={<ProductionManager/>} />
                         <Route path="/production/delivered" element={<DeliveredProjects />} />
                         {/* <Route path="/HR/verifyemplyee" element={<VerifyEmployee />} /> */}
                         {/* <Route path="/HR/leave" element={<Leave />} /> */}

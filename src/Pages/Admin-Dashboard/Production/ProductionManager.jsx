@@ -1,7 +1,7 @@
 import React from "react";
 import ProductionDashboard from "./ProductionDashboard";
 
-const ProductionPage = ({dashboardName}) => {
+const ProductionManager = ({dashboardName}) => {
   return (
     <div className="p-4">
       <ProductionDashboard dashboardName={dashboardName} />
@@ -9,4 +9,4 @@ const ProductionPage = ({dashboardName}) => {
   );
 };
 
-export default ProductionPage;
+export default ProductionManager;
