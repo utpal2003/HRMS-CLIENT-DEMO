@@ -33,7 +33,7 @@ const Tooltip = ({ children, content, disabled }) => {
 
 // --- Navigation Data ---
 const mainNavigation = [
-    { label: 'Dashboard', icon: <LuLayoutDashboard  size={20} />, to: '/' },
+    { label: 'Dashboard', icon: <LuLayoutDashboard size={20} />, to: '/' },
     { label: 'Employee', icon: <FaUsers size={20} />, to: '/TotalEmployee' },
     { label: 'Client', icon: <FaUserTie size={20} />, to: '/clients' },
     {
@@ -58,7 +58,7 @@ const mainNavigation = [
         icon: <GrUserManager size={20} />,
         subItems: [
             { label: 'Verify Employee', icon: <MdVerified />, to: '/HR/verifyemplyee' },
-            { label: 'Leave', icon: <MdOutlineDirectionsRun />, to: '/HR/leave' },
+            { label: 'Leave', icon: <MdOutlineDirectionsRun />, to: '/' },
             { label: 'Salary', icon: <RiMoneyRupeeCircleFill />, to: '/HR/salary' },
             { label: 'Certificate', icon: <TbNotes />, to: '/HR/certificate' },
             // { label: 'Company WO', icon: <FaShoppingCart />, to: '/HR/companyWO' },
@@ -67,21 +67,18 @@ const mainNavigation = [
             { label: 'ID Card', icon: <FaRegIdCard />, to: '/HR/idcard' },
             {
                 label: 'Letter', icon: <MdOutlineMailOutline />, subItems: [
-                    { label: 'Offer Letter', icon: <TbFileCertificate />, to: '/HR/offerletter' },
-                    { label: 'Termination Letter', icon: <MdOutlineCancel />, to: '/HR/terminationletter' },
+                    { label: 'Offer Letter', icon: <TbFileCertificate />, to: '/' },
+                    { label: 'Termination Letter', icon: <MdOutlineCancel />, to: '/' },
                 ]
             },
             {
                 label: 'Report', icon: <MdReport />, subItems: [
-                    { label: 'Leave Report', icon: <MdOutlineDirectionsRun />, to: '/HR/leavereport' },
+                    { label: 'Leave Report', icon: <MdOutlineDirectionsRun />, to: '/' },
                     { label: 'Salary Report', icon: <RiMoneyRupeeCircleFill />, to: '/HR/salaryreport' }
                 ]
             },
             {
-                label: 'Others', icon: <MdReadMore />, subItems: [
-                    { label: 'Holidays', icon: <MdHolidayVillage />, to: '/HR/holidays' },
-                    { label: 'Calendar', icon: <FaCalendarAlt />, to: '/HR/calendar' }
-                ]
+                label: 'Others', icon: <MdReadMore />, to: '/'
             }
         ]
     },
@@ -92,7 +89,7 @@ const mainNavigation = [
             { label: 'BANK & FUND', icon: <GiMoneyStack />, to: '/accounts/bank' },
             { label: 'RECEIPT', icon: <IoReceiptSharp />, to: '/accounts/receipt' },
             { label: 'COMMISSION', icon: <FaCreativeCommonsShare />, to: '/accounts/comission' },
-            { label: 'INCOME & EXPENSE', icon: <GiExpense />, to: '/accounts/income-expenes' }
+            // { label: 'INCOME & EXPENSE', icon: <GiExpense />, to: '/accounts/income-expenes' }
         ],
     },
     { label: 'CRM', icon: <MdPeople size={20} />, to: '/crm' },
@@ -242,20 +239,20 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
                     <div className="relative">
                         {/* Profile Pop-up Menu */}
                         {isProfileMenuOpen && (
-                             <div ref={profileMenuRef} className="absolute bottom-full mb-2 w-full bg-white border border-gray-200 rounded-lg shadow-xl z-20 animate-fadeIn overflow-hidden">
-                                 <ul className="py-1">
-                                     <li>
-                                         <Link to="/settings" className="flex items-center gap-3 w-full text-left px-4 py-2.5 text-sm text-orange-900 hover:bg-orange-100 hover:text-orange-500 transition-colors">
-                                             <IoSettingsOutline className='text-lg' />Settings
-                                         </Link>
-                                     </li>
-                                     <li>
-                                         <button className="flex items-center gap-3 w-full text-left px-4 py-2.5 text-sm text-red-500 hover:bg-red-100 transition-colors" onClick={() => alert("Handle logout")}>
-                                             <BiLogOut className="text-lg" />Logout
-                                         </button>
-                                     </li>
-                                 </ul>
-                             </div>
+                            <div ref={profileMenuRef} className="absolute bottom-full mb-2 w-full bg-white border border-gray-200 rounded-lg shadow-xl z-20 animate-fadeIn overflow-hidden">
+                                <ul className="py-1">
+                                    <li>
+                                        <Link to="/settings" className="flex items-center gap-3 w-full text-left px-4 py-2.5 text-sm text-orange-900 hover:bg-orange-100 hover:text-orange-500 transition-colors">
+                                            <IoSettingsOutline className='text-lg' />Settings
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <button className="flex items-center gap-3 w-full text-left px-4 py-2.5 text-sm text-red-500 hover:bg-red-100 transition-colors" onClick={() => alert("Handle logout")}>
+                                            <BiLogOut className="text-lg" />Logout
+                                        </button>
+                                    </li>
+                                </ul>
+                            </div>
                         )}
 
                         {/* Profile Trigger Button */}
