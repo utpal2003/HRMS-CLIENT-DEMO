@@ -9,29 +9,29 @@ import AddTask from '../../Pages/Admin-Dashboard/AddTask';
 import Getallemployee from '../../Pages/Admin-Dashboard/Employees/Getallemployee';
 import Order from '../../Pages/Admin-Dashboard/projects/Order';
 import WorkOrderList from '../../Pages/Admin-Dashboard/projects/workorders/WorkOrderList';
-import OffetLetter from '../../pages/Admin-Dashboard/HR/OffetLetter';
-import TerminationLetter from '../../pages/Admin-Dashboard/HR/TerminationLetter';
-import Leave from '../../pages/Admin-Dashboard/HR/Leave';
+// import OffetLetter from '../../Pages/Admin-Dashboard/HR/OffetLetter';
+// import TerminationLetter from '../../pages/Admin-Dashboard/HR/TerminationLetter';
+// import Leave from '../../pages/Admin-Dashboard/HR/Leave';
 import VerifyEmployee from '../../pages/Admin-Dashboard/HR/VerifyEmployee';
 import Interview from '../../pages/Admin-Dashboard/HR/Interview';
 import SalaryReport from '../../pages/Admin-Dashboard/HR/SalaryReport';
-import Holidays from '../../pages/Admin-Dashboard/HR/Holidays';
+// import Holidays from '../../pages/Admin-Dashboard/HR/Holidays';
 import Crm from '../../pages/Admin-Dashboard/CRM/Crm';
 import Certificate from '../../pages/Admin-Dashboard/HR/Certificate';
 import IdCard from '../../pages/Admin-Dashboard/HR/IdCard';
 import Salary from '../../pages/Admin-Dashboard/HR/Salary';
-import Calendar from '../../pages/Admin-Dashboard/HR/Calendar';
+// import Calendar from '../../pages/Admin-Dashboard/HR/Calendar';
 import Perfomance from '../../pages/Admin-Dashboard/HR/Perfomance';
-import LeaveReport from '../../pages/Admin-Dashboard/HR/LeaveReport';
-import HRWO_Manager from '../../pages/Admin-Dashboard/HR/CompanyWo/HRWO_Manager';
+// import LeaveReport from '../../pages/Admin-Dashboard/HR/LeaveReport';
+// import HRWO_Manager from '../../pages/Admin-Dashboard/HR/CompanyWo/HRWO_Manager';
 import ProductionManager from '../../pages/Admin-Dashboard/Production/ProductionManager';
 import DeliveredProjects from '../../pages/Admin-Dashboard/Production/DeliveredProjects';
-import AdminProfile from '../../pages/Admin-Dashboard/Profile/AdminProfile';
-import SettingDashboard from '../../pages/Admin-Dashboard/Setting/SettingDashboard';
-import Authorization from '../../pages/Admin-Dashboard/Setting/Authorization/Authorization';
-import Letterhead from '../../pages/Admin-Dashboard/Setting/Documents/Letterhead';
-import TermCondition from '../../pages/Admin-Dashboard/Setting/Documents/TermCondition';
-import Organization from '../../pages/Admin-Dashboard/Setting/Organization/Organization';
+// import AdminProfile from '../../pages/Admin-Dashboard/Profile/AdminProfile';
+// import SettingDashboard from '../../pages/Admin-Dashboard/Setting/SettingDashboard';
+// import Authorization from '../../pages/Admin-Dashboard/Setting/Authorization/Authorization';
+// import Letterhead from '../../pages/Admin-Dashboard/Setting/Documents/Letterhead';
+// import TermCondition from '../../pages/Admin-Dashboard/Setting/Documents/TermCondition';
+// import Organization from '../../pages/Admin-Dashboard/Setting/Organization/Organization';
 import AccountManager from '../../pages/Admin-Dashboard/Accounts/AccountManager';
 import ReceiptManager from '../../pages/Admin-Dashboard/Accounts/ReceiptManager';
 import CommisionManger from '../../pages/Admin-Dashboard/Accounts/CommisionManger';
@@ -99,30 +99,30 @@ const Dashboard = () => {
                         <Route path="/production" element={<ProductionManager />} />
                         <Route path="/production/delivered" element={<DeliveredProjects />} />
                         <Route path="/HR/verifyemplyee" element={<VerifyEmployee />} />
-                        <Route path="/HR/leave" element={<Leave />} />
+                        {/* <Route path="/HR/leave" element={<Leave />} /> */}
                         <Route path="/HR/salary" element={<Salary />} />
                         <Route path="/HR/certificate" element={<Certificate />} />
                         <Route path="/HR/idcard" element={<IdCard />} />
                         <Route path="/HR/performance" element={<Perfomance />} />
-                        <Route path="/HR/holidays" element={<Holidays />} />
-                        <Route path="/HR/calendar" element={<Calendar />} />
+                        {/* <Route path="/HR/holidays" element={<Holidays />} />
+                        <Route path="/HR/calendar" element={<Calendar />} /> */}
                         <Route path="/HR/interview" element={<Interview />} />
-                        <Route path="/HR/companyWO" element={<HRWO_Manager />} />
+                        {/* <Route path="/HR/companyWO" element={<HRWO_Manager />} />
                         <Route path="/HR/offerletter" element={<OffetLetter />} />
                         <Route path="/HR/terminationletter" element={<TerminationLetter />} />
-                        <Route path="/HR/leavereport" element={<LeaveReport />} />
+                        <Route path="/HR/leavereport" element={<LeaveReport />} /> */}
                         <Route path="/HR/salaryreport" element={<SalaryReport />} />
                         <Route path="/accounts/bank" element={<AccountManager />} />
                         <Route path="/accounts/receipt" element={<ReceiptManager />} />
                         <Route path="/accounts/comission" element={<CommisionManger />} />
                         <Route path="/accounts/income-expenes" element={<Incaome_ExpenseManager />} />
                         <Route path="/crm" element={<Crm />} />
-                        <Route path="/adminprofile" element={<AdminProfile />} />
+                        {/* <Route path="/adminprofile" element={<AdminProfile />} />
                         <Route path="/settingdashboard" element={<SettingDashboard />} />
                         <Route path="/setting/Authorization" element={<Authorization />} />
                         <Route path="/setting/Letterhead" element={<Letterhead />} />
                         <Route path="/setting/TermCondition" element={<TermCondition />} />
-                        <Route path="/setting/Organization" element={<Organization />} />
+                        <Route path="/setting/Organization" element={<Organization />} /> */}
                     </Routes>
                 </main>
 
