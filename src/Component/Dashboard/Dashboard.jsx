@@ -12,16 +12,16 @@ import WorkOrderList from '../../Pages/Admin-Dashboard/projects/workorders/WorkO
 // import OffetLetter from '../../Pages/Admin-Dashboard/HR/OffetLetter';
 // import TerminationLetter from '../../pages/Admin-Dashboard/HR/TerminationLetter';
 // import Leave from '../../pages/Admin-Dashboard/HR/Leave';
-import VerifyEmployee from '../../Pages/Admin-Dashboard/HR/VerifyEmployee';
-import Interview from '../../pages/Admin-Dashboard/HR/Interview';
-import SalaryReport from '../../pages/Admin-Dashboard/HR/SalaryReport';
+// import VerifyEmployee from '../../Pages/Admin-Dashboard/HR/VerifyEmployee';
+// import Interview from '../../pages/Admin-Dashboard/HR/Interview';
+// import SalaryReport from '../../pages/Admin-Dashboard/HR/SalaryReport';
 // import Holidays from '../../pages/Admin-Dashboard/HR/Holidays';
 import Crm from '../../pages/Admin-Dashboard/CRM/Crm';
-import Certificate from '../../pages/Admin-Dashboard/HR/Certificate';
-import IdCard from '../../pages/Admin-Dashboard/HR/IdCard';
-import Salary from '../../pages/Admin-Dashboard/HR/Salary';
+// import Certificate from '../../pages/Admin-Dashboard/HR/Certificate';
+// import IdCard from '../../pages/Admin-Dashboard/HR/IdCard';
+// import Salary from '../../pages/Admin-Dashboard/HR/Salary';
 // import Calendar from '../../pages/Admin-Dashboard/HR/Calendar';
-import Perfomance from '../../pages/Admin-Dashboard/HR/Perfomance';
+// import Perfomance from '../../pages/Admin-Dashboard/HR/Perfomance';
 // import LeaveReport from '../../pages/Admin-Dashboard/HR/LeaveReport';
 // import HRWO_Manager from '../../pages/Admin-Dashboard/HR/CompanyWo/HRWO_Manager';
 import ProductionManager from '../../pages/Admin-Dashboard/Production/ProductionManager';
@@ -98,20 +98,20 @@ const Dashboard = () => {
 
                         <Route path="/production" element={<ProductionManager />} />
                         <Route path="/production/delivered" element={<DeliveredProjects />} />
-                        <Route path="/HR/verifyemplyee" element={<VerifyEmployee />} />
+                        {/* <Route path="/HR/verifyemplyee" element={<VerifyEmployee />} /> */}
                         {/* <Route path="/HR/leave" element={<Leave />} /> */}
-                        <Route path="/HR/salary" element={<Salary />} />
+                        {/* <Route path="/HR/salary" element={<Salary />} />
                         <Route path="/HR/certificate" element={<Certificate />} />
                         <Route path="/HR/idcard" element={<IdCard />} />
-                        <Route path="/HR/performance" element={<Perfomance />} />
+                        <Route path="/HR/performance" element={<Perfomance />} /> */}
                         {/* <Route path="/HR/holidays" element={<Holidays />} />
                         <Route path="/HR/calendar" element={<Calendar />} /> */}
-                        <Route path="/HR/interview" element={<Interview />} />
+                        {/* <Route path="/HR/interview" element={<Interview />} /> */}
                         {/* <Route path="/HR/companyWO" element={<HRWO_Manager />} />
                         <Route path="/HR/offerletter" element={<OffetLetter />} />
                         <Route path="/HR/terminationletter" element={<TerminationLetter />} />
                         <Route path="/HR/leavereport" element={<LeaveReport />} /> */}
-                        <Route path="/HR/salaryreport" element={<SalaryReport />} />
+                        {/* <Route path="/HR/salaryreport" element={<SalaryReport />} /> */}
                         <Route path="/accounts/bank" element={<AccountManager />} />
                         <Route path="/accounts/receipt" element={<ReceiptManager />} />
                         <Route path="/accounts/comission" element={<CommisionManger />} />
