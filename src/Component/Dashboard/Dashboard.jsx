@@ -10,39 +10,39 @@ import Getallemployee from '../../Pages/Admin-Dashboard/Employees/Getallemployee
 import Order from '../../Pages/Admin-Dashboard/projects/Order';
 import WorkOrderList from '../../Pages/Admin-Dashboard/projects/workorders/WorkOrderList';
 // import OffetLetter from '../../Pages/Admin-Dashboard/HR/OffetLetter';
-// import TerminationLetter from '../../pages/Admin-Dashboard/HR/TerminationLetter';
-// import Leave from '../../pages/Admin-Dashboard/HR/Leave';
+// import TerminationLetter from '../../Pages/Admin-Dashboard/HR/TerminationLetter';
+// import Leave from '../../Pages/Admin-Dashboard/HR/Leave';
 // import VerifyEmployee from '../../Pages/Admin-Dashboard/HR/VerifyEmployee';
-// import Interview from '../../pages/Admin-Dashboard/HR/Interview';
-// import SalaryReport from '../../pages/Admin-Dashboard/HR/SalaryReport';
-// import Holidays from '../../pages/Admin-Dashboard/HR/Holidays';
-import Crm from '../../pages/Admin-Dashboard/CRM/Crm';
-// import Certificate from '../../pages/Admin-Dashboard/HR/Certificate';
-// import IdCard from '../../pages/Admin-Dashboard/HR/IdCard';
-// import Salary from '../../pages/Admin-Dashboard/HR/Salary';
-// import Calendar from '../../pages/Admin-Dashboard/HR/Calendar';
-// import Perfomance from '../../pages/Admin-Dashboard/HR/Perfomance';
-// import LeaveReport from '../../pages/Admin-Dashboard/HR/LeaveReport';
-// import HRWO_Manager from '../../pages/Admin-Dashboard/HR/CompanyWo/HRWO_Manager';
-import ProductionManager from '../../pages/Admin-Dashboard/Production/ProductionManager';
-import DeliveredProjects from '../../pages/Admin-Dashboard/Production/DeliveredProjects';
-// import AdminProfile from '../../pages/Admin-Dashboard/Profile/AdminProfile';
-// import SettingDashboard from '../../pages/Admin-Dashboard/Setting/SettingDashboard';
-// import Authorization from '../../pages/Admin-Dashboard/Setting/Authorization/Authorization';
-// import Letterhead from '../../pages/Admin-Dashboard/Setting/Documents/Letterhead';
-// import TermCondition from '../../pages/Admin-Dashboard/Setting/Documents/TermCondition';
-// import Organization from '../../pages/Admin-Dashboard/Setting/Organization/Organization';
-import AccountManager from '../../pages/Admin-Dashboard/Accounts/AccountManager';
-import ReceiptManager from '../../pages/Admin-Dashboard/Accounts/ReceiptManager';
-import CommisionManger from '../../pages/Admin-Dashboard/Accounts/CommisionManger';
-import Incaome_ExpenseManager from '../../pages/Admin-Dashboard/Accounts/Incaome_ExpenseManager';
+// import Interview from '../../Pages/Admin-Dashboard/HR/Interview';
+// import SalaryReport from '../../Pages/Admin-Dashboard/HR/SalaryReport';
+// import Holidays from '../../Pages/Admin-Dashboard/HR/Holidays';
+import Crm from '../../Pages/Admin-Dashboard/CRM/Crm';
+// import Certificate from '../../Pages/Admin-Dashboard/HR/Certificate';
+// import IdCard from '../../Pages/Admin-Dashboard/HR/IdCard';
+// import Salary from '../../Pages/Admin-Dashboard/HR/Salary';
+// import Calendar from '../../Pages/Admin-Dashboard/HR/Calendar';
+// import Perfomance from '../../Pages/Admin-Dashboard/HR/Perfomance';
+// import LeaveReport from '../../Pages/Admin-Dashboard/HR/LeaveReport';
+// import HRWO_Manager from '../../Pages/Admin-Dashboard/HR/CompanyWo/HRWO_Manager';
+import ProductionManager from '../../Pages/Admin-Dashboard/Production/ProductionManager';
+import DeliveredProjects from '../../Pages/Admin-Dashboard/Production/DeliveredProjects';
+// import AdminProfile from '../../Pages/Admin-Dashboard/Profile/AdminProfile';
+// import SettingDashboard from '../../Pages/Admin-Dashboard/Setting/SettingDashboard';
+// import Authorization from '../../Pages/Admin-Dashboard/Setting/Authorization/Authorization';
+// import Letterhead from '../../Pages/Admin-Dashboard/Setting/Documents/Letterhead';
+// import TermCondition from '../../Pages/Admin-Dashboard/Setting/Documents/TermCondition';
+// import Organization from '../../Pages/Admin-Dashboard/Setting/Organization/Organization';
+import AccountManager from '../../Pages/Admin-Dashboard/Accounts/AccountManager';
+import ReceiptManager from '../../Pages/Admin-Dashboard/Accounts/ReceiptManager';
+import CommisionManger from '../../Pages/Admin-Dashboard/Accounts/CommisionManger';
+import Incaome_ExpenseManager from '../../Pages/Admin-Dashboard/Accounts/Incaome_ExpenseManager';
 import InitialDashboardContent from '../../Pages/Admin-Dashboard/InitialDashboardContain';
 import ClientListUI from '../../Pages/Admin-Dashboard/Clients/ClientListUI';
 import AddClientForm from '../../Pages/Admin-Dashboard/Clients/AddClientForm';
 import ClientProfile from '../../Pages/Admin-Dashboard/Clients/ClientProfile';
-import AddProject from '../../pages/Admin-Dashboard/projects/AddProject';
-import Workordergeneratedproject from '../../pages/Admin-Dashboard/projects/workordergeneratedproject';
-import ProjectProfile from '../../pages/Admin-Dashboard/projects/ProjectProfile';
+import AddProject from '../../Pages/Admin-Dashboard/projects/AddProject';
+import Workordergeneratedproject from '../../Pages/Admin-Dashboard/projects/workordergeneratedproject';
+import ProjectProfile from '../../Pages/Admin-Dashboard/projects/ProjectProfile';
 
 
 
@@ -96,7 +96,7 @@ const Dashboard = () => {
 
 
 
-                        <Route path="/production" element={<ProductionManager/>} />
+                        <Route path="/production" element={<ProductionManager />} />
                         <Route path="/production/delivered" element={<DeliveredProjects />} />
                         {/* <Route path="/HR/verifyemplyee" element={<VerifyEmployee />} /> */}
                         {/* <Route path="/HR/leave" element={<Leave />} /> */}
