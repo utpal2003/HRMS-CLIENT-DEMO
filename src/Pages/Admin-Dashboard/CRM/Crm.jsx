@@ -95,9 +95,9 @@ const Crm = () => {
   };
 
   return (
-    <div className="p-6 bg-background dark:bg-gray-900 min-h-screen transition-colors duration-300">
+    <div className="p-6 bg-[#fff7ed] dark:bg-gray-900 min-h-screen transition-colors duration-300">
       <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 mb-6">
-        <h1 className="text-2xl sm:text-3xl font-semibold text-blue-600 dark:text-blue-400">
+        <h1 className="text-2xl sm:text-3xl font-semibold text-orange-600 dark:text-orange-400">
           Lead Management
         </h1>
         <button
@@ -105,10 +105,10 @@ const Crm = () => {
             setEditLead(null);
             setShowAddLead(true);
           }}
-          className="px-6 py-2 bg-blue-200 text-blue-700 border-2 border-blue-500 
+          className="px-6 py-2 bg-orange-200 text-orange-700 border-2 border-orange-500 
              font-semibold rounded-full shadow-md 
-             hover:bg-blue-600 hover:text-white hover:shadow-lg 
-             focus:outline-none focus:ring-2 focus:ring-blue-400
+             hover:bg-orange-600 hover:text-white hover:shadow-lg 
+             focus:outline-none focus:ring-2 focus:ring-orange-400
              transition duration-200"
         >
           + Add Lead
@@ -137,9 +137,6 @@ const Crm = () => {
         </div>
       )}
     </div>
-
-
-
   );
 };
 

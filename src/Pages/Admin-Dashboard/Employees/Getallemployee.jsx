@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { FaBan, FaUserEdit, FaCheckCircle, FaSearch, FaUserPlus } from 'react-icons/fa';
 import { Tooltip } from 'react-tooltip';
 import 'react-tooltip/dist/react-tooltip.css';
-import EmployeeProfile from './EmployeeProfile'; 
-import AddNewEmployeeForm from './AddNewEmployee'; 
+import EmployeeProfile from './EmployeeProfile';
+import AddNewEmployeeForm from './AddNewEmployee';
 
 // --- NEW: DETAILED DUMMY DATA ---
 const dummyEmployees = [
@@ -55,6 +55,125 @@ const dummyEmployees = [
         loginRestricted: false,
         online: false,
     },
+    {
+        _id: '3',
+        firstName: 'Michael',
+        lastName: 'Johnson',
+        employeeId: 'EMP003',
+        employeeType: 'contract',
+        phone: '345-678-9012',
+        alternativePhone: '876-543-2109',
+        email: 'michael.johnson@example.com',
+        dateOfBirth: '1988-09-22',
+        age: '37',
+        gender: 'Male',
+        blood: 'B+',
+        country: 'India',
+        state: 'Maharashtra',
+        city: 'Mumbai',
+        fullAddress: '456 Marine Drive, Mumbai',
+        zip: '400020',
+        fatherName: 'Robert Johnson',
+        motherName: 'Linda Johnson',
+        companyInfo: {
+            joinDate: '2023-03-10',
+            designation: 'Backend Developer',
+            department: 'Technology',
+            employeeStatus: 'Active',
+        },
+        employeeImage: 'https://i.pravatar.cc/150?img=3',
+        loginRestricted: false,
+        online: true,
+    },
+    {
+        _id: '4',
+        firstName: 'Priya',
+        lastName: 'Sharma',
+        employeeId: 'EMP004',
+        employeeType: 'part-time',
+        phone: '456-789-0123',
+        email: 'priya.sharma@example.com',
+        dateOfBirth: '1995-02-18',
+        age: '30',
+        gender: 'Female',
+        blood: 'O+',
+        country: 'India',
+        state: 'Delhi',
+        city: 'New Delhi',
+        fullAddress: '89 Connaught Place, New Delhi',
+        zip: '110001',
+        fatherName: 'Anil Sharma',
+        motherName: 'Sunita Sharma',
+        companyInfo: {
+            joinDate: '2024-06-01',
+            designation: 'UI/UX Designer',
+            department: 'Design',
+            employeeStatus: 'Probation',
+        },
+        employeeImage: 'https://i.pravatar.cc/150?img=4',
+        loginRestricted: false,
+        online: false,
+    },
+    {
+        _id: '5',
+        firstName: 'Rahul',
+        lastName: 'Patel',
+        employeeId: 'EMP005',
+        employeeType: 'full-time',
+        phone: '567-890-1234',
+        alternativePhone: '765-432-1098',
+        email: 'rahul.patel@example.com',
+        dateOfBirth: '1992-11-05',
+        age: '33',
+        gender: 'Male',
+        blood: 'AB+',
+        country: 'India',
+        state: 'Gujarat',
+        city: 'Ahmedabad',
+        fullAddress: '22 C.G. Road, Ahmedabad',
+        zip: '380009',
+        fatherName: 'Vijay Patel',
+        motherName: 'Kiran Patel',
+        companyInfo: {
+            joinDate: '2020-07-20',
+            designation: 'QA Engineer',
+            department: 'Quality Assurance',
+            employeeStatus: 'Active',
+        },
+        employeeImage: 'https://i.pravatar.cc/150?img=5',
+        loginRestricted: false,
+        online: true,
+    },
+    {
+        _id: '6',
+        firstName: 'Sara',
+        lastName: 'Khan',
+        employeeId: 'EMP006',
+        employeeType: 'intern',
+        phone: '678-901-2345',
+        email: 'sara.khan@example.com',
+        dateOfBirth: '2000-03-28',
+        age: '25',
+        gender: 'Female',
+        blood: 'B-',
+        country: 'India',
+        state: 'Karnataka',
+        city: 'Bengaluru',
+        fullAddress: '14 MG Road, Bengaluru',
+        zip: '560001',
+        fatherName: 'Imran Khan',
+        motherName: 'Nazia Khan',
+        companyInfo: {
+            joinDate: '2025-01-10',
+            designation: 'Software Intern',
+            department: 'Technology',
+            employeeStatus: 'Intern',
+        },
+        employeeImage: 'https://i.pravatar.cc/150?img=6',
+        loginRestricted: false,
+        online: false,
+    },
+
 ];
 
 // --- Main Employee List Component ---
@@ -87,14 +206,14 @@ const Getallemployee = () => {
         e.stopPropagation();
         setEmployees(employees.map(emp => emp._id === employeeId ? { ...emp, loginRestricted: !emp.loginRestricted } : emp));
     };
-    
+
     const filteredEmployees = employees.filter(emp => `${emp.firstName} ${emp.lastName} ${emp.employeeId}`.toLowerCase().includes(searchQuery.toLowerCase()));
 
     if (showEmployeeProfile && selectedEmployee) {
         return (
-            <EmployeeProfile 
-                employeeData={selectedEmployee} 
-                handleBackToEmployeeList={() => setShowEmployeeProfile(false)} 
+            <EmployeeProfile
+                employeeData={selectedEmployee}
+                handleBackToEmployeeList={() => setShowEmployeeProfile(false)}
             />
         );
     }
@@ -169,7 +288,7 @@ const Getallemployee = () => {
 
             {showAddEmployeeModal && (
                 <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-60 p-4 animate-fadeIn">
-                    <AddNewEmployeeForm 
+                    <AddNewEmployeeForm
                         initialData={selectedEmployee}
                         onCancel={() => setShowAddEmployeeModal(false)}
                     />

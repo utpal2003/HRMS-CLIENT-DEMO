@@ -26,7 +26,7 @@ const LeadList = ({ leads, onRemove, onUpdate }) => {
               onClick={() => toggleExpand(lead.sl)}
             >
               <div>
-                <h3 className="text-lg font-semibold text-blue-700 dark:text-blue-400 break-words">
+                <h3 className="text-lg font-semibold text-orange-700 dark:text-orange-400 break-words">
                   {lead.clientName}
                 </h3>
                 <p className="text-sm text-gray-600 dark:text-gray-300">
@@ -37,54 +37,38 @@ const LeadList = ({ leads, onRemove, onUpdate }) => {
                 </p>
               </div>
 
-
               <div className='flex justify-center items-center gap-4'>
-
-
-
                 <div className="hidden md:flex justify-end gap-2 mt-4">
                   <button
-                    onClick={() => onUpdate(lead)}
-                    className="px-6 py-2 bg-green-200 text-green-700 border-2 border-green-500 
-             text-sm font-semibold rounded-full shadow-md 
-             hover:bg-green-600 hover:text-white hover:shadow-lg 
-             focus:outline-none focus:ring-2 focus:ring-green-400
-             transition duration-200"
+                    onClick={(e) => { e.stopPropagation(); onUpdate(lead); }}
+                    className="px-6 py-2 bg-orange-200 text-orange-700 border-2 border-orange-500 
+                     text-sm font-semibold rounded-full shadow-md 
+                     hover:bg-orange-600 hover:text-white hover:shadow-lg 
+                     focus:outline-none focus:ring-2 focus:ring-orange-400
+                     transition duration-200"
                   >
                     Update
                   </button>
-
                   <button
-                    onClick={() => onRemove(lead.sl)}
+                    onClick={(e) => { e.stopPropagation(); onRemove(lead.sl); }}
                     className="px-6 py-2 bg-red-200 text-red-700 border-2 border-red-500 
-             text-sm font-semibold rounded-full shadow-md 
-             hover:bg-red-600 hover:text-white hover:shadow-lg 
-             focus:outline-none focus:ring-2 focus:ring-red-400
-             transition duration-200"
+                     text-sm font-semibold rounded-full shadow-md 
+                     hover:bg-red-600 hover:text-white hover:shadow-lg 
+                     focus:outline-none focus:ring-2 focus:ring-red-400
+                     transition duration-200"
                   >
                     Delete
                   </button>
                 </div>
-
                 <div className="text-gray-500 dark:text-gray-300 px-4 py-1.5">
                   {isOpen ? <FaChevronUp /> : <FaChevronDown />}
                 </div>
               </div>
-
-
-
-
-
-
-
             </div>
 
             {/* Expanded content */}
             {isOpen && (
               <div className="mt-4 border-t border-gray-200 dark:border-gray-700 px-4 md:px-8 py-4">
-
-
-
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 text-sm text-gray-700 dark:text-gray-200 leading-relaxed">
                   <p><span className="font-medium text-gray-500">Date:</span> {lead.date}</p>
                   <p><span className="font-medium text-gray-500">Source:</span> {lead.source}</p>
@@ -97,25 +81,23 @@ const LeadList = ({ leads, onRemove, onUpdate }) => {
                     <span className="font-medium text-gray-500">Requirement:</span> {lead.requirement}
                   </p>
 
-                  {lead.finalStatus === "Cancel" && (
+                  {lead.finalStatus === "Cancelled" && (
                     <p className="sm:col-span-2 lg:col-span-3 text-red-600">
                       <span className="font-medium">Cancel Reason:</span> {lead.cancelReason}
                     </p>
                   )}
 
-                  {lead.finalStatus === "Deal" && (
-                    <p className="sm:col-span-2 lg:col-span-3 text-green-600">
-                      <span className="font-medium">Deal Amount:</span> ₹ {lead.dealAmount}
+                  {lead.finalStatus === "Deal Done" && (
+                    <p className="sm:col-span-2 lg:col-span-3 text-orange-600">
+                      <span className="font-medium">Deal Amount:</span> {lead.dealAmount}
                     </p>
                   )}
                 </div>
 
-                {/* Action Buttons */}
-
-
-                <div className=" gap-2 flex justify-end mt-4 block md:hidden">
+                {/* Action Buttons for mobile */}
+                <div className=" gap-2 flex justify-end mt-4  md:hidden">
                   <button
-                    className="px-4 py-1.5 text-sm font-semibold bg-yellow-500 text-white rounded-lg hover:bg-yellow-600 transition"
+                    className="px-4 py-1.5 text-sm font-semibold bg-orange-500 text-white rounded-lg hover:bg-orange-600 transition"
                     onClick={() => onUpdate(lead)}
                   >
                     Update
@@ -127,7 +109,6 @@ const LeadList = ({ leads, onRemove, onUpdate }) => {
                     Delete
                   </button>
                 </div>
-
               </div>
             )}
           </div>

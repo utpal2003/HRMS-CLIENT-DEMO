@@ -61,7 +61,7 @@ const mainNavigation = [
             { label: 'Leave', icon: <MdOutlineDirectionsRun />, to: '/HR/leave' },
             { label: 'Salary', icon: <RiMoneyRupeeCircleFill />, to: '/HR/salary' },
             { label: 'Certificate', icon: <TbNotes />, to: '/HR/certificate' },
-            { label: 'Company WO', icon: <FaShoppingCart />, to: '/HR/companyWO' },
+            // { label: 'Company WO', icon: <FaShoppingCart />, to: '/HR/companyWO' },
             { label: 'Performance', icon: <MdOutlineSpeed />, to: '/HR/performance' },
             { label: 'Interview', icon: <FaUserTie />, to: '/HR/interview' },
             { label: 'ID Card', icon: <FaRegIdCard />, to: '/HR/idcard' },

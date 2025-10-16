@@ -6,12 +6,9 @@ import Navbar from './Navbar';
 import AddTask from '../../Pages/Admin-Dashboard/AddTask';
 
 // All your page components go here
-import TotalProjects from '../../pages/Admin-Dashboard/projects/TotalProjects';
-import CompleteProjects from '../../pages/Admin-Dashboard/projects/CompleteProjects';
-import PendingProjects from '../../pages/Admin-Dashboard/projects/PendingProjects';
 import Getallemployee from '../../Pages/Admin-Dashboard/Employees/Getallemployee';
-import Order from '../../Component/Order';
-import WorkOrderList from '../../Component/workorders/WorkOrderList';
+import Order from '../../Pages/Admin-Dashboard/projects/Order';
+import WorkOrderList from '../../Pages/Admin-Dashboard/projects/workorders/WorkOrderList';
 import OffetLetter from '../../pages/Admin-Dashboard/HR/OffetLetter';
 import TerminationLetter from '../../pages/Admin-Dashboard/HR/TerminationLetter';
 import Leave from '../../pages/Admin-Dashboard/HR/Leave';
@@ -43,6 +40,10 @@ import InitialDashboardContent from '../../Pages/Admin-Dashboard/InitialDashboar
 import ClientListUI from '../../Pages/Admin-Dashboard/Clients/ClientListUI';
 import AddClientForm from '../../Pages/Admin-Dashboard/Clients/AddClientForm';
 import ClientProfile from '../../Pages/Admin-Dashboard/Clients/ClientProfile';
+import AddProject from '../../pages/Admin-Dashboard/projects/AddProject';
+import Workordergeneratedproject from '../../pages/Admin-Dashboard/projects/workordergeneratedproject';
+import ProjectProfile from '../../pages/Admin-Dashboard/projects/ProjectProfile';
+
 
 
 const Dashboard = () => {
@@ -80,14 +81,22 @@ const Dashboard = () => {
                         <Route path="/clients/edit/:clientId" element={<AddClientForm isEditMode={true} />} />
 
 
+                        {/* For projects and order */}
+
+                        <Route path="/order" element={<Order />} />
+                        {/* <Route path="/projects" element={<TotalProjects />} /> */}
+                        <Route path="/order/add-order" element={<AddProject />} />
+
+                        <Route path="/WorkOrder" element={<WorkOrderList />} />
+                        <Route path='/projects' element={<Workordergeneratedproject />} />
+                        <Route path="/projects/profile/:projectId" element={<ProjectProfile />} />
 
 
-                        <Route path="/projects" element={<TotalProjects dashboardName="employee-dashboard" />} />
-                        <Route path="/projects/completed" element={<CompleteProjects />} />
-                        <Route path="/projects/pending" element={<PendingProjects />} />
-                        <Route path="/order" element={<Order dashboardType="admin-dashboard" />} />
-                        <Route path="/WorkOrder" element={<WorkOrderList dashboardName="admin-dashboard" />} />
-                        <Route path="/production" element={<ProductionManager dashboardName="admin-dashboard" />} />
+
+
+
+
+                        <Route path="/production" element={<ProductionManager />} />
                         <Route path="/production/delivered" element={<DeliveredProjects />} />
                         <Route path="/HR/verifyemplyee" element={<VerifyEmployee />} />
                         <Route path="/HR/leave" element={<Leave />} />

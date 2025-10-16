@@ -106,11 +106,11 @@ const BankList = ({ dashboardName }) => {
             <div
               key={bank.id}
               className="bg-white dark:bg-gray-800 rounded-3xl p-6 shadow-lg hover:shadow-2xl transition-shadow duration-300 transform hover:-translate-y-2 cursor-pointer border border-gray-200 dark:border-gray-700"
-              onClick={() =>
-                navigate(`/${dashboardName}/accounts/bankdetails`, {
-                  state: { bank },
-                })
-              }
+              // onClick={() =>
+              //   navigate(`/${dashboardName}/accounts/bankdetails`, {
+              //     state: { bank },
+              //   })
+              // }
             >
               <div className="flex items-center justify-between mb-4">
                 <h3 className="text-xl font-bold text-blue-700 dark:text-blue-400 tracking-wide">

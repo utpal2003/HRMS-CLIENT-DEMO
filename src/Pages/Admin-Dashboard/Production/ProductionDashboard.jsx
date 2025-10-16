@@ -178,9 +178,6 @@ const ProductionDashboard = ({dashboardName}) => {
                text-white shadow-md hover:shadow-lg 
                transform hover:scale-105 transition-all duration-300 
                flex-1 min-w-[100px] border border-blue-500"
-                      onClick={() =>
-                        navigate(`/${dashboardName}/production/bugs/${project.projectId}`)
-                      }
                     >
                       Bugs
                     </button>

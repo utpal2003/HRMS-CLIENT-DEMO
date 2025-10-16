@@ -212,11 +212,11 @@ const ProjectProfile = () => {
     );
 
     return (
-        <div className="min-h-screen bg-gray-50 dark:bg-gray-900 p-6 sm:p-8">
+        <div className="min-h-screen bg-[#fff9f2] dark:bg-gray-900 p-6 sm:p-8">
             <div className="max-w-7xl mx-auto bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden border border-gray-200 dark:border-gray-700">
 
                 {/* Header */}
-                <div className="bg-gradient-to-r from-blue-700 to-blue-900 text-white p-6 sm:p-8 flex flex-col sm:flex-row items-start sm:items-center justify-between">
+                <div className="bg-gradient-to-r from-orange-500 to-orange-700 text-white p-6 sm:p-8 flex flex-col sm:flex-row items-start sm:items-center justify-between">
                     <div>
                         {isEditing ? (
                             <input
@@ -255,7 +255,7 @@ const ProjectProfile = () => {
                   ${editableProject.status === 'Complete' ? 'bg-green-500 text-white' :
                                         editableProject.status === 'In Progress' ? 'bg-yellow-500 text-white' :
                                             editableProject.status === 'Pending' ? 'bg-gray-500 text-white' :
-                                                'bg-red-500 text-white'}
+                                                'bg-orange-500 text-white'}
                 `}
                             >
                                 <option value="Complete">Complete</option>
@@ -297,38 +297,6 @@ const ProjectProfile = () => {
                         )}
                     </div>
                 </div>
-
-                {/* Project Image Placeholder */}
-                {/* <div className="p-6 sm:p-8 border-b border-gray-200 dark:border-gray-700">
-                    <h2 className="text-xl sm:text-2xl font-bold text-gray-800 dark:text-white mb-4 pb-3 border-b border-gray-200 dark:border-gray-700">Project Visuals</h2>
-                    <div className="flex justify-center items-center h-64 bg-gray-100 dark:bg-gray-700 rounded-lg overflow-hidden shadow-inner">
-                        {projectImage ? (
-                            <img src={projectImage} alt="Project Visual" className="object-cover w-full h-full" />
-                        ) : (
-                            <div className="text-gray-400 dark:text-gray-500 flex flex-col items-center">
-                                <FaImage className="text-5xl mb-2" />
-                                <p className="text-lg">No Project Image Available</p>
-                            </div>
-                        )}
-                    </div>
-                    {isEditing && (
-                        <div className="mt-4">
-                            <label htmlFor="projectImage" className="block text-gray-700 dark:text-gray-300 text-sm font-bold mb-2">
-                                Project Image URL:
-                            </label>
-                            <input
-                                type="text"
-                                id="projectImage"
-                                name="projectImage"
-                                value={editableProject.projectImage || ''}
-                                onChange={handleChange}
-                                placeholder="Enter image URL"
-                                className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
-                            />
-                        </div>
-                    )}
-                </div> */}
-
                 {/* Main Content */}
                 <div className="p-6 sm:p-8">
 
@@ -439,7 +407,7 @@ const ProjectProfile = () => {
                             {renderCostField('Server Cost', serverCost, 'serverCost')}
 
                             <div className="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-lg flex flex-col items-center justify-center text-center">
-                                <span className="text-blue-700 dark:text-blue-300 text-sm font-semibold mb-1">Other Accessories</span>
+                                <span className="text-orange-00 dark:text-blue-300 text-sm font-semibold mb-1">Other Accessories</span>
                                 {isEditing ? (
                                     <>
                                         <input
