@@ -12,7 +12,7 @@ import WorkOrderList from '../../Pages/Admin-Dashboard/projects/workorders/WorkO
 // import OffetLetter from '../../Pages/Admin-Dashboard/HR/OffetLetter';
 // import TerminationLetter from '../../pages/Admin-Dashboard/HR/TerminationLetter';
 // import Leave from '../../pages/Admin-Dashboard/HR/Leave';
-import VerifyEmployee from '../../pages/Admin-Dashboard/HR/VerifyEmployee';
+import VerifyEmployee from '../../Pages/Admin-Dashboard/HR/VerifyEmployee';
 import Interview from '../../pages/Admin-Dashboard/HR/Interview';
 import SalaryReport from '../../pages/Admin-Dashboard/HR/SalaryReport';
 // import Holidays from '../../pages/Admin-Dashboard/HR/Holidays';
