@@ -78,17 +78,16 @@ const InitialDashboardContent = () => {
         <div className="p-4 sm:p-6 bg-orange-50 min-h-screen rounded-md">
             {/* --- HEADER --- */}
             <div className="mb-8">
-                <h1 className="text-3xl font-bold text-orange-900">Dashboard</h1>
-                <p className="text-gray-600 mt-1">Here's a snapshot of your business activities today.</p>
+                <h1 className="text-3xl font-bold text-orange-900">Dashboard : </h1>
             </div>
 
             {/* --- WELCOME BANNER --- */}
             <div className="bg-white flex flex-wrap items-center justify-between gap-4 p-5 rounded-2xl shadow-md mb-8">
                 <div className="flex items-center gap-4">
-                    <img src="https://i.pravatar.cc/150?img=9" alt="Profile" className="w-16 h-16 rounded-full border-4 border-orange-200 object-cover" />
+                    <img src="https://i.pravatar.cc/150?img=32" alt="Profile" className="w-16 h-16 rounded-full border-4 border-orange-200 object-cover" />
                     <div>
-                        <h2 className="text-2xl font-bold text-orange-900">Hi, Admin User!</h2>
-                        <p className="text-gray-600 font-medium">Welcome back to ABC Company</p>
+                        {/* <h2 className="text-2xl font-bold text-orange-900">Hi, Admin User!</h2> */}
+                        <p className="text-gray-900 font-bold text-lg md:text-xl">Welcome back to ABC Company</p>
                     </div>
                 </div>
                 <div className="flex flex-wrap items-center gap-4 sm:gap-6 text-right">
@@ -125,8 +124,7 @@ const InitialDashboardContent = () => {
             </div>
 
             {/* --- MAIN CONTENT AREA --- */}
-            <div className="flex flex-col lg:flex-row gap-8">
-                {/* Performance Chart */}
+            {/* <div className="flex flex-col lg:flex-row gap-8">
                 <div className="bg-white rounded-2xl shadow-md p-6 w-full lg:w-3/5">
                     <h3 className="text-xl font-semibold text-orange-900 mb-4">Performance Overview</h3>
                     <div className="w-full h-80 flex items-center justify-center p-4">
@@ -178,7 +176,7 @@ const InitialDashboardContent = () => {
                     </div>
                 </div>
 
-                {/* Tasks List */}
+
                 <div className="bg-white rounded-2xl shadow-md p-6 w-full lg:w-2/5">
                     <div className="flex flex-wrap justify-between items-center mb-4 gap-2">
                         <h3 className="text-xl font-semibold text-orange-900">Today's Tasks</h3>
@@ -251,7 +249,10 @@ const InitialDashboardContent = () => {
                         )}
                     </ul>
                 </div>
-            </div>
+            </div> */}
+
+
+
         </div>
     );
 };

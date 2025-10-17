@@ -74,9 +74,9 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen }) => {
 
                     {/* Right Side: Icons */}
                     <div className="flex items-center space-x-1 sm:space-x-3 mr-2">
-                        <button onClick={() => setIsDarkMode(!isDarkMode)} className={iconButtonClasses}>
+                        {/* <button onClick={() => setIsDarkMode(!isDarkMode)} className={iconButtonClasses}>
                             {isDarkMode ? <FaSun className="text-lg text-yellow-400" /> : <FaMoon className="text-xl" />}
-                        </button>
+                        </button> */}
 
                         <button className={iconButtonClasses}>
                             <FaSearch className="text-xl" />
@@ -102,9 +102,9 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen }) => {
                             )}
                         </div>
 
-                        <button onClick={handleChatClick} className={iconButtonClasses}>
+                        {/* <button onClick={handleChatClick} className={iconButtonClasses}>
                             <IoChatbubbleEllipsesOutline className="text-xl" />
-                        </button>
+                        </button> */}
                     </div>
                 </div>
             </header>

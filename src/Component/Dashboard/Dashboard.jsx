@@ -33,7 +33,7 @@ import AdminProfile from '../../Pages/Admin-Dashboard/Profile/AdminProfile';
 // import TermCondition from '../../Pages/Admin-Dashboard/Setting/Documents/TermCondition';
 // import Organization from '../../Pages/Admin-Dashboard/Setting/Organization/Organization';
 import AccountManager from '../../Pages/Admin-Dashboard/Accounts/AccountManager';
-import ReceiptManager from '../../Pages/Admin-Dashboard/Accounts/ReceiptManager';
+// import ReceiptManager from '../../Pages/Admin-Dashboard/Accounts/ReceiptManager';
 import CommisionManger from '../../Pages/Admin-Dashboard/Accounts/CommisionManger';
 import Incaome_ExpenseManager from '../../Pages/Admin-Dashboard/Accounts/Incaome_ExpenseManager';
 import InitialDashboardContent from '../../Pages/Admin-Dashboard/InitialDashboardContain';
@@ -113,7 +113,7 @@ const Dashboard = () => {
                         <Route path="/HR/leavereport" element={<LeaveReport />} />
                         <Route path="/HR/salaryreport" element={<SalaryReport />} />
                         <Route path="/accounts/bank" element={<AccountManager />} />
-                        <Route path="/accounts/receipt" element={<ReceiptManager />} />
+                        {/* <Route path="/accounts/receipt" element={<ReceiptManager />} /> */}
                         <Route path="/accounts/comission" element={<CommisionManger />} />
                         <Route path="/accounts/income-expenes" element={<Incaome_ExpenseManager />} />
                         <Route path="/crm" element={<Crm />} />

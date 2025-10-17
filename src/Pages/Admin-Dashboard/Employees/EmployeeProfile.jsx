@@ -184,13 +184,17 @@ const EmployeeProfile = ({ employeeData: initialEmployeeData, handleBackToEmploy
                                 <InfoField label="Shift" value={editableData.companyInfo.shift} name="companyInfo.shift" isEditing={isEditing} onChange={handleChange} icon={<FaBusinessTime />} />
                             </div>
                         </div>
+
+{/* 
                         <div className="bg-surfaceNeutral rounded-2xl shadow-lg p-6">
                             <SectionHeader title="Documents" />
                             <div className="grid grid-cols-2 gap-4">
                                <ImageField label="Aadhar Front" imageUrl={editableData.adharFrontImage} name="adharFrontImage" isEditing={isEditing} onChange={handleImageFileChange} />
                                <ImageField label="PAN Card" imageUrl={editableData.panFrontImage} name="panFrontImage" isEditing={isEditing} onChange={handleImageFileChange} />
                             </div>
-                        </div>
+                        </div> */}
+
+
                     </div>
                 </div>
             </div>

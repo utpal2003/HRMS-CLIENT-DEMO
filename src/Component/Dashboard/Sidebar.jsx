@@ -16,7 +16,7 @@ import { GrUserManager } from "react-icons/gr";
 import { RiMoneyRupeeCircleFill } from 'react-icons/ri';
 import { TbFileCertificate, TbNotes } from 'react-icons/tb';
 import { LuLayoutDashboard } from "react-icons/lu";
-import companylogo from '../../../public/watermark logo.png'; // Make sure this path is correct
+// import companylogo from '../../../public/watermark logo.png'; // Make sure this path is correct
 
 // --- Custom Tooltip Component (Themed) ---
 const Tooltip = ({ children, content, disabled }) => {
@@ -60,26 +60,26 @@ const mainNavigation = [
             { label: 'Verify Employee', icon: <MdVerified />, to: '/HR/verifyemplyee' },
             { label: 'Leave', icon: <MdOutlineDirectionsRun />, to: '/' },
             { label: 'Salary', icon: <RiMoneyRupeeCircleFill />, to: '/HR/salary' },
-            { label: 'Certificate', icon: <TbNotes />, to: '/HR/certificate' },
-            // { label: 'Company WO', icon: <FaShoppingCart />, to: '/HR/companyWO' },
-            { label: 'Performance', icon: <MdOutlineSpeed />, to: '/HR/performance' },
-            { label: 'Interview', icon: <FaUserTie />, to: '/HR/interview' },
-            { label: 'ID Card', icon: <FaRegIdCard />, to: '/HR/idcard' },
-            {
-                label: 'Letter', icon: <MdOutlineMailOutline />, subItems: [
-                    { label: 'Offer Letter', icon: <TbFileCertificate />, to: '/' },
-                    { label: 'Termination Letter', icon: <MdOutlineCancel />, to: '/' },
-                ]
-            },
-            {
-                label: 'Report', icon: <MdReport />, subItems: [
-                    { label: 'Leave Report', icon: <MdOutlineDirectionsRun />, to: '/' },
-                    { label: 'Salary Report', icon: <RiMoneyRupeeCircleFill />, to: '/HR/salaryreport' }
-                ]
-            },
-            {
-                label: 'Others', icon: <MdReadMore />, to: '/'
-            }
+            // { label: 'Certificate', icon: <TbNotes />, to: '/HR/certificate' },
+            // // { label: 'Company WO', icon: <FaShoppingCart />, to: '/HR/companyWO' },
+            // { label: 'Performance', icon: <MdOutlineSpeed />, to: '/HR/performance' },
+            // { label: 'Interview', icon: <FaUserTie />, to: '/HR/interview' },
+            // { label: 'ID Card', icon: <FaRegIdCard />, to: '/HR/idcard' },
+            // {
+            //     label: 'Letter', icon: <MdOutlineMailOutline />, subItems: [
+            //         { label: 'Offer Letter', icon: <TbFileCertificate />, to: '/' },
+            //         { label: 'Termination Letter', icon: <MdOutlineCancel />, to: '/' },
+            //     ]
+            // },
+            // {
+            //     label: 'Report', icon: <MdReport />, subItems: [
+            //         { label: 'Leave Report', icon: <MdOutlineDirectionsRun />, to: '/' },
+            //         { label: 'Salary Report', icon: <RiMoneyRupeeCircleFill />, to: '/HR/salaryreport' }
+            //     ]
+            // },
+            // {
+            //     label: 'Others', icon: <MdReadMore />, to: '/'
+            // }
         ]
     },
     {
@@ -89,7 +89,7 @@ const mainNavigation = [
             { label: 'BANK & FUND', icon: <GiMoneyStack />, to: '/accounts/bank' },
             { label: 'RECEIPT', icon: <IoReceiptSharp />, to: '/accounts/receipt' },
             { label: 'COMMISSION', icon: <FaCreativeCommonsShare />, to: '/accounts/comission' },
-            // { label: 'INCOME & EXPENSE', icon: <GiExpense />, to: '/accounts/income-expenes' }
+            { label: 'INCOME & EXPENSE', icon: <GiExpense />, to: '/accounts/income-expenes' }
         ],
     },
     { label: 'CRM', icon: <MdPeople size={20} />, to: '/crm' },
@@ -225,8 +225,8 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
             `}>
                 {/* Header */}
                 <div className={`flex items-center p-4 h-[60px] border-b border-gray-200 ${isOpen ? 'justify-start space-x-2' : 'justify-center'}`}>
-                    <img src={companylogo} alt='logo' className='h-8 w-auto flex-shrink-0' />
-                    {isOpen && <h2 className="text-xl font-bold tracking-wider whitespace-nowrap text-orange-500">Admin</h2>}
+                    <img src='abc' alt='logo' className='h-8 w-auto flex-shrink-0' />
+                    {isOpen && <h2 className="text-xl font-bold tracking-wider whitespace-nowrap text-orange-500">LLC</h2>}
                 </div>
 
                 {/* Navigation */}

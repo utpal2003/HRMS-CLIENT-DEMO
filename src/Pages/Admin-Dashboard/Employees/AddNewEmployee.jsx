@@ -13,6 +13,7 @@ const AddNewEmployeeForm = ({ initialData, onCancel }) => {
     lastName: "",
     employeeType: "",
     email: "",
+    countryCode: "+1",
     phone: "",
     password: "",
     confirmPassword: "",
@@ -28,6 +29,7 @@ const AddNewEmployeeForm = ({ initialData, onCancel }) => {
         lastName: initialData.lastName || "",
         employeeType: initialData.employeeType || "",
         email: initialData.email || "",
+        countryCode: initialData.countryCode || "+1",
         phone: initialData.phone || "",
         password: "",
         confirmPassword: "",
@@ -78,6 +80,7 @@ const AddNewEmployeeForm = ({ initialData, onCancel }) => {
         </div>
 
         <form className="space-y-5" onSubmit={handleSubmit}>
+          {/* Employee ID and Salutation */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
             <div>
               <label className="block text-sm font-medium mb-1 text-brandText">Employee ID</label>
@@ -93,6 +96,7 @@ const AddNewEmployeeForm = ({ initialData, onCancel }) => {
             </div>
           </div>
 
+          {/* First Name and Last Name */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
             <div>
               <label className="block text-sm font-medium mb-1 text-brandText">First Name</label>
@@ -104,6 +108,7 @@ const AddNewEmployeeForm = ({ initialData, onCancel }) => {
             </div>
           </div>
 
+          {/* Employee Type */}
           <div>
             <label className="block text-sm font-medium mb-1 text-brandText">Employee Type</label>
             <select name="employeeType" value={formData.employeeType} onChange={handleChange} className={inputClasses} required>
@@ -115,10 +120,23 @@ const AddNewEmployeeForm = ({ initialData, onCancel }) => {
             </select>
           </div>
 
+          {/* Email */}
+          <div>
+            <label className="block text-sm font-medium mb-1 text-brandText">Email</label>
+            <input type="email" name="email" value={formData.email} onChange={handleChange} className={inputClasses} placeholder="john.doe@example.com" required />
+          </div>
+
+          {/* Country Code and Phone */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
             <div>
-              <label className="block text-sm font-medium mb-1 text-brandText">Email</label>
-              <input type="email" name="email" value={formData.email} onChange={handleChange} className={inputClasses} placeholder="john.doe@example.com" required />
+              <label className="block text-sm font-medium mb-1 text-brandText">Country Code</label>
+              <select name="countryCode" value={formData.countryCode} onChange={handleChange} className={inputClasses} required>
+                <option value="+1">+1 (USA)</option>
+                <option value="+44">+44 (UK)</option>
+                <option value="+91">+91 (India)</option>
+                <option value="+61">+61 (Australia)</option>
+                <option value="+81">+81 (Japan)</option>
+              </select>
             </div>
             <div>
               <label className="block text-sm font-medium mb-1 text-brandText">Phone</label>
@@ -126,6 +144,7 @@ const AddNewEmployeeForm = ({ initialData, onCancel }) => {
             </div>
           </div>
 
+          {/* Password fields for new employee */}
           {!initialData && (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
               <div>
@@ -139,6 +158,7 @@ const AddNewEmployeeForm = ({ initialData, onCancel }) => {
             </div>
           )}
 
+          {/* Buttons */}
           <div className="flex justify-end gap-4 pt-4 border-t border-surfaceNeutral">
             <button type="button" onClick={onCancel} className="px-6 py-2.5 rounded-lg text-secondaryText bg-surfaceNeutral hover:bg-surfaceNeutral font-semibold transition-colors">Cancel</button>
             <button type="submit" className="px-6 py-2.5 rounded-lg text-white bg-brandPrimary hover:bg-brandHover font-semibold transition-colors shadow-sm hover:shadow-md">
