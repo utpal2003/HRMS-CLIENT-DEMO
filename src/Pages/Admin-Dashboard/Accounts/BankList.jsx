@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import FundForm from "./FundForm";
+import FundForm from "./FundForm"; // This component is provided below
 
 const BankList = ({ dashboardName }) => {
   const navigate = useNavigate();
 
-  const [banks] = useState([
+  // Hardcoded bank data (functionality unchanged)
+  const [banks, setBanks] = useState([
     {
       id: 1,
       bankName: "HDFC Bank",
@@ -91,13 +92,12 @@ const BankList = ({ dashboardName }) => {
     },
   ]);
 
-
   const [selectedBankForFund, setSelectedBankForFund] = useState(null);
 
   return (
     <div className="min-h-screen p-8 sm:p-12 bg-background dark:bg-gray-900">
       <div className="max-w-6xl mx-auto">
-        <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-8 sm:mb-10 text-center">
+        <h1 className="text-3xl sm:text-4xl font-bold text-orange-600 dark:text-orange-400 mb-8 sm:mb-10 text-center"> {/* THEME CHANGE */}
           Your Bank Accounts
         </h1>
 
@@ -105,20 +105,20 @@ const BankList = ({ dashboardName }) => {
           {banks.map((bank) => (
             <div
               key={bank.id}
-              className="bg-white dark:bg-gray-800 rounded-3xl p-6 shadow-lg hover:shadow-2xl transition-shadow duration-300 transform hover:-translate-y-2 cursor-pointer border border-gray-200 dark:border-gray-700"
-              // onClick={() =>
-              //   navigate(`/${dashboardName}/accounts/bankdetails`, {
-              //     state: { bank },
-              //   })
-              // }
+              className="bg-white dark:bg-gray-800 rounded-3xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 cursor-pointer border border-gray-200 dark:border-gray-700 group"
+              onClick={() => // Re-enabled navigation
+                navigate(`/${dashboardName}/accounts/bankdetails`, {
+                  state: { bank },
+                })
+              }
             >
               <div className="flex items-center justify-between mb-4">
-                <h3 className="text-xl font-bold text-blue-700 dark:text-blue-400 tracking-wide">
+                <h3 className="text-xl font-bold text-orange-700 dark:text-orange-400 tracking-wide"> {/* THEME CHANGE */}
                   {bank.bankName}
                 </h3>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  className="h-7 w-7 text-blue-400 dark:text-blue-300"
+                  className="h-7 w-7 text-orange-400 dark:text-orange-300 transition-transform duration-300 group-hover:scale-110" // THEME CHANGE
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -136,33 +136,36 @@ const BankList = ({ dashboardName }) => {
                 <p>
                   <strong className="font-semibold text-gray-800 dark:text-gray-100">
                     Holder:
-                  </strong> {bank.holderName}
+                  </strong>{" "}
+                  {bank.holderName}
                 </p>
                 <p>
                   <strong className="font-semibold text-gray-800 dark:text-gray-100">
                     Account No:
-                  </strong> {bank.accountNo}
+                  </strong>{" "}
+                  {bank.accountNo}
                 </p>
                 <p className="text-sm">
                   <strong className="font-semibold text-gray-800 dark:text-gray-100">
                     IFSC:
-                  </strong> {bank.ifscCode}
+                  </strong>{" "}
+                  {bank.ifscCode}
                 </p>
                 <p className="text-sm">
                   <strong className="font-semibold text-gray-800 dark:text-gray-100">
                     SWIFT:
-                  </strong> {bank.swiftCode}
+                  </strong>{" "}
+                  {bank.swiftCode}
                 </p>
-
               </div>
 
               <div className="mt-6 flex justify-end">
                 <button
                   onClick={(e) => {
-                    e.stopPropagation();
+                    e.stopPropagation(); // Prevents card navigation
                     setSelectedBankForFund(bank);
                   }}
-                  className="px-5 py-2 bg-green-600 text-white font-semibold text-sm rounded-xl shadow-md hover:bg-green-700 transition duration-300 transform hover:scale-105"
+                  className="px-5 py-2 bg-orange-600 text-white font-semibold text-sm rounded-xl shadow-md hover:bg-orange-700 transition duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-opacity-50" // THEME CHANGE
                 >
                   Add Fund
                 </button>
@@ -171,6 +174,7 @@ const BankList = ({ dashboardName }) => {
           ))}
         </div>
 
+        {/* Modal logic remains unchanged */}
         {selectedBankForFund && (
           <FundForm
             bank={selectedBankForFund}

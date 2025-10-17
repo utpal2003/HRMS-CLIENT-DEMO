@@ -27,7 +27,7 @@ const Performance = () => {
     );
 
     return (
-        <div className="min-h-screen p-6 sm:p-8 bg-background text-gray-900 dark:bg-gray-900 dark:text-gray-100 transition-colors duration-300">
+        <div className="min-h-screen p-6 sm:p-8 bg-[#fff7ed] text-gray-900 dark:bg-gray-900 dark:text-gray-100 transition-colors duration-300">
             <div className="max-w-7xl mx-auto">
                 {/* Header and Search */}
                 <div className="flex flex-col md:flex-row justify-between items-center gap-4 mb-8">

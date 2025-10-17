@@ -9,13 +9,13 @@ const AddBankAccount = ({ onClose }) => {
     swiftCode: "",
   });
 
-  // handle input changes
+  // handle input changes (functionality unchanged)
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  // handle submit
+  // handle submit (functionality unchanged)
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Bank Account Added:", formData);
@@ -36,7 +36,7 @@ const AddBankAccount = ({ onClose }) => {
 
   return (
     <div className="bg-white dark:bg-gray-900 p-6 rounded-2xl shadow-lg w-full max-w-lg mx-auto">
-      <h2 className="text-2xl font-bold mb-6 text-center text-blue-600 dark:text-blue-400">
+      <h2 className="text-2xl font-bold mb-6 text-center text-orange-600 dark:text-orange-400"> {/* THEME CHANGE */}
         Add Bank Account
       </h2>
 
@@ -52,7 +52,7 @@ const AddBankAccount = ({ onClose }) => {
             value={formData.bankName}
             onChange={handleChange}
             placeholder="Enter Bank Name"
-            className="w-full p-2 border rounded-lg bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-200 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="w-full p-2 border rounded-lg bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-200 focus:ring-2 focus:ring-orange-500 focus:border-transparent" // THEME CHANGE
             required
           />
         </div>
@@ -68,7 +68,7 @@ const AddBankAccount = ({ onClose }) => {
             value={formData.ifscCode}
             onChange={handleChange}
             placeholder="Enter IFSC Code"
-            className="w-full p-2 border rounded-lg bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-200 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="w-full p-2 border rounded-lg bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-200 focus:ring-2 focus:ring-orange-500 focus:border-transparent" // THEME CHANGE
             required
           />
         </div>
@@ -84,7 +84,7 @@ const AddBankAccount = ({ onClose }) => {
             value={formData.accountNo}
             onChange={handleChange}
             placeholder="Enter Account Number"
-            className="w-full p-2 border rounded-lg bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-200 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="w-full p-2 border rounded-lg bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-200 focus:ring-2 focus:ring-orange-500 focus:border-transparent" // THEME CHANGE
             required
           />
         </div>
@@ -100,7 +100,7 @@ const AddBankAccount = ({ onClose }) => {
             value={formData.holderName}
             onChange={handleChange}
             placeholder="Enter Account Holder Name"
-            className="w-full p-2 border rounded-lg bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-200 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="w-full p-2 border rounded-lg bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-200 focus:ring-2 focus:ring-orange-500 focus:border-transparent" // THEME CHANGE
             required
           />
         </div>
@@ -116,7 +116,7 @@ const AddBankAccount = ({ onClose }) => {
             value={formData.swiftCode}
             onChange={handleChange}
             placeholder="Enter SWIFT Code"
-            className="w-full p-2 border rounded-lg bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-200 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="w-full p-2 border rounded-lg bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-200 focus:ring-2 focus:ring-orange-500 focus:border-transparent" // THEME CHANGE
           />
         </div>
 
@@ -131,7 +131,7 @@ const AddBankAccount = ({ onClose }) => {
           </button>
           <button
             type="submit"
-            className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 dark:hover:bg-blue-500 transition-colors"
+            className="px-4 py-2 bg-orange-600 text-white rounded-lg hover:bg-orange-700 dark:hover:bg-orange-500 transition-colors" // THEME CHANGE
           >
             Add Bank
           </button>

@@ -19,6 +19,8 @@ const IdCard = ({ dashboardName }) => {
     joinDate: "",
     image: "",
   });
+
+  // Functionality remains unchanged
   const convertImageToBase64 = (url) => {
     return new Promise((resolve, reject) => {
       const img = new Image();
@@ -39,6 +41,7 @@ const IdCard = ({ dashboardName }) => {
     });
   };
 
+  // Functionality remains unchanged
   const handleDownloadPDF = async () => {
     const element = pdfRef.current;
 
@@ -62,15 +65,14 @@ const IdCard = ({ dashboardName }) => {
     }
   };
 
-
-
-
   return (
     <div className="min-h-screen bg-background dark:bg-gray-900 p-4 rounded-3xl w-full">
       {showPreview ? (
         // === PDF Preview Only ===
         <div className="bg-background p-4 mt-6 relative">
-          <h1 className="font-bold p-4 text-2xl text-blue-500">Generated PDF</h1>
+          <h1 className="font-bold p-4 text-2xl text-orange-500"> {/* THEME CHANGE */}
+            Generated PDF
+          </h1>
           <div className="flex justify-center overflow-auto mt-4">
             <div
               ref={pdfRef}
@@ -108,15 +110,20 @@ const IdCard = ({ dashboardName }) => {
                     />
 
                     {/* Row 2: Company Name */}
-                    <h1 className="text-[10px] font-bold mt-0 text-center">INDOMITECH GROUP</h1>
+                    <h1 className="text-[10px] font-bold mt-0 text-center">
+                      INDOMITECH GROUP
+                    </h1>
 
                     {/* Profile Image */}
                     <div className="mt-3">
                       <p
-                        className="w-[90px] h-[90px] rounded-2xl border-2 border-blue-600 bg-center bg-cover"
+                        className="w-[90px] h-[90px] rounded-2xl border-2 border-orange-600 bg-center bg-cover" // THEME CHANGE
                         style={{
-                          backgroundImage: `url(${formData.image || emp_data?.employeeImage || "/default-profile.png"})`, // Redux Image
-                          // backgroundImage: `url("/otp.avif")`
+                          backgroundImage: `url(${
+                            formData.image ||
+                            emp_data?.employeeImage ||
+                            "/default-profile.png"
+                          })`,
                         }}
                       ></p>
                     </div>
@@ -133,18 +140,27 @@ const IdCard = ({ dashboardName }) => {
 
                     {/* ID, Email, Phone */}
                     <div className="text-[8px] mt-4 w-full px-12 leading-tight">
-                      <div><strong>ID:</strong> {formData.id}</div>
-                      <div><strong>Email:</strong> {formData.email}</div>
-                      <div><strong>Phone:</strong> {formData.phone}</div>
+                      <div>
+                        <strong>ID:</strong> {formData.id}
+                      </div>
+                      <div>
+                        <strong>Email:</strong> {formData.email}
+                      </div>
+                      <div>
+                        <strong>Phone:</strong> {formData.phone}
+                      </div>
                     </div>
 
                     {/* Barcode Image at Bottom */}
                     <div className="mt-auto mb-8">
-                      <img src="/barcode.png" alt="Barcode" className="w-[120px] h-[65px] object-contain" />
+                      <img
+                        src="/barcode.png"
+                        alt="Barcode"
+                        className="w-[120px] h-[65px] object-contain"
+                      />
                     </div>
                   </div>
                 </div>
-
 
                 {/* Back Side */}
                 <div
@@ -164,45 +180,45 @@ const IdCard = ({ dashboardName }) => {
                   {/* Overlay content */}
                   <div className="absolute inset-0 p-3 text-[9px] flex flex-col justify-end mb-16 ml-10">
                     <div className="rounded px-2 py-1">
-                      <div><strong>Blood:</strong> {formData.bloodGroup || "N/A"}</div>
-                      <div><strong>Join:</strong> {formData.joinDate || "N/A"}</div>
+                      <div>
+                        <strong>Blood:</strong> {formData.bloodGroup || "N/A"}
+                      </div>
+                      <div>
+                        <strong>Join:</strong> {formData.joinDate || "N/A"}
+                      </div>
                     </div>
                   </div>
                 </div>
-
               </div>
-
-
             </div>
           </div>
           <div className="flex justify-center mt-6 gap-4">
             <button
               onClick={() => setShowPreview(false)}
               className="bg-red-200 text-red-700 border-2 border-red-500 
-             px-6 py-2 rounded-full shadow-md font-semibold text-sm
-             hover:bg-red-600 hover:text-white hover:shadow-lg 
-             focus:outline-none focus:ring-2 focus:ring-red-400
-             transition duration-200"
+               px-6 py-2 rounded-full shadow-md font-semibold text-sm
+               hover:bg-red-600 hover:text-white hover:shadow-lg 
+               focus:outline-none focus:ring-2 focus:ring-red-400
+               transition duration-200"
             >
               Close
             </button>
 
             <button
               onClick={handleDownloadPDF}
-              className="bg-indigo-200 text-indigo-700 border-2 border-indigo-500 
-             px-6 py-2 rounded-full shadow-md font-semibold text-sm
-             hover:bg-indigo-600 hover:text-white hover:shadow-lg 
-             focus:outline-none focus:ring-2 focus:ring-indigo-400
-             transition duration-200"
+              className="bg-orange-200 text-orange-700 border-2 border-orange-500 
+               px-6 py-2 rounded-full shadow-md font-semibold text-sm
+               hover:bg-orange-600 hover:text-white hover:shadow-lg 
+               focus:outline-none focus:ring-2 focus:ring-orange-400
+               transition duration-200" // THEME CHANGE
             >
               Download
             </button>
-
           </div>
         </div>
       ) : (
         <>
-          <div className="relative p-6 bg-gradient-to-br from-blue-400 to-indigo-800 dark:from-blue-700 dark:to-indigo-900 text-white flex justify-between items-center rounded-t-3xl">
+          <div className="relative p-6 bg-gradient-to-br from-orange-400 to-orange-700 dark:from-orange-700 dark:to-orange-900 text-white flex justify-between items-center rounded-t-3xl"> {/* THEME CHANGE */}
             <Link to={`/${dashboardName}`}>
               <button className="px-5 py-2 bg-white bg-opacity-20 hover:bg-opacity-30 rounded-full text-base font-medium transition duration-300 ease-in-out flex items-center gap-2">
                 <IoMdArrowRoundBack className="text-xl" />
@@ -217,12 +233,16 @@ const IdCard = ({ dashboardName }) => {
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
               {/* Select Employee Dropdown */}
               <div>
-                <label className="block mb-1 font-medium text-gray-700 dark:text-white">Select Employee:</label>
+                <label className="block mb-1 font-medium text-gray-700 dark:text-white">
+                  Select Employee:
+                </label>
                 <select
                   value={formData.id}
-                  onChange={async (e) => {
+                  onChange={async (e) => { // Functionality remains unchanged
                     const selectedId = e.target.value;
-                    const selectedEmp = emp_data.find(emp => emp.id === selectedId);
+                    const selectedEmp = emp_data.find(
+                      (emp) => emp.id === selectedId
+                    );
 
                     if (selectedEmp) {
                       // convert to base64 if image exists
@@ -240,16 +260,19 @@ const IdCard = ({ dashboardName }) => {
                         joinDate: selectedEmp.companyInfo.joinDate || "",
                         image: selectedEmp.employeeImage,
                       });
-
                     } else {
                       setFormData({
-                        id: "", name: "", email: "", phone: "",
-                        post: "", bloodGroup: "", joinDate: "", image: ""
+                        id: "",
+                        name: "",
+                        email: "",
+                        phone: "",
+                        post: "",
+                        bloodGroup: "",
+                        joinDate: "",
+                        image: "",
                       });
                     }
                   }}
-
-
                   className="w-full p-2 rounded-md border dark:border-gray-600 dark:bg-gray-700 dark:text-white"
                 >
                   <option value="">Select Employee</option>
@@ -263,7 +286,9 @@ const IdCard = ({ dashboardName }) => {
 
               {/* ID */}
               <div>
-                <label className="block mb-1 font-medium text-gray-700 dark:text-white">ID:</label>
+                <label className="block mb-1 font-medium text-gray-700 dark:text-white">
+                  ID:
+                </label>
                 <input
                   type="text"
                   placeholder="Enter ID"
@@ -275,7 +300,9 @@ const IdCard = ({ dashboardName }) => {
 
               {/* Name */}
               <div>
-                <label className="block mb-1 font-medium text-gray-700 dark:text-white">Name:</label>
+                <label className="block mb-1 font-medium text-gray-700 dark:text-white">
+                  Name:
+                </label>
                 <input
                   type="text"
                   placeholder="Enter full name"
@@ -287,7 +314,9 @@ const IdCard = ({ dashboardName }) => {
 
               {/* Email */}
               <div>
-                <label className="block mb-1 font-medium text-gray-700 dark:text-white">Email:</label>
+                <label className="block mb-1 font-medium text-gray-700 dark:text-white">
+                  Email:
+                </label>
                 <input
                   type="email"
                   placeholder="Enter email address"
@@ -299,7 +328,9 @@ const IdCard = ({ dashboardName }) => {
 
               {/* Phone */}
               <div>
-                <label className="block mb-1 font-medium text-gray-700 dark:text-white">Phone:</label>
+                <label className="block mb-1 font-medium text-gray-700 dark:text-white">
+                  Phone:
+                </label>
                 <input
                   type="tel"
                   placeholder="Enter phone number"
@@ -311,7 +342,9 @@ const IdCard = ({ dashboardName }) => {
 
               {/* Post */}
               <div>
-                <label className="block mb-1 font-medium text-gray-700 dark:text-white">Post:</label>
+                <label className="block mb-1 font-medium text-gray-700 dark:text-white">
+                  Post:
+                </label>
                 <input
                   type="text"
                   placeholder="Designation"
@@ -323,7 +356,9 @@ const IdCard = ({ dashboardName }) => {
 
               {/* Join Date */}
               <div>
-                <label className="block mb-1 font-medium text-gray-700 dark:text-white">Join Date:</label>
+                <label className="block mb-1 font-medium text-gray-700 dark:text-white">
+                  Join Date:
+                </label>
                 <input
                   type="text"
                   placeholder="DD/MM/YYYY"
@@ -335,7 +370,9 @@ const IdCard = ({ dashboardName }) => {
 
               {/* Blood Group */}
               <div>
-                <label className="block mb-1 font-medium text-gray-700 dark:text-white">Blood Group:</label>
+                <label className="block mb-1 font-medium text-gray-700 dark:text-white">
+                  Blood Group:
+                </label>
                 <input
                   type="text"
                   placeholder="Enter blood group (e.g. B+)"
@@ -351,15 +388,14 @@ const IdCard = ({ dashboardName }) => {
           <div className="flex justify-center mt-6 gap-4">
             <button
               onClick={() => setShowPreview(true)}
-              className="bg-blue-200 text-blue-700 border-2 border-blue-500 
-             px-6 py-2 rounded-full shadow-md font-semibold text-sm
-             hover:bg-blue-600 hover:text-white hover:shadow-lg 
-             focus:outline-none focus:ring-2 focus:ring-blue-400
-             transition duration-200"
+              className="bg-orange-200 text-orange-700 border-2 border-orange-500 
+               px-6 py-2 rounded-full shadow-md font-semibold text-sm
+               hover:bg-orange-600 hover:text-white hover:shadow-lg 
+               focus:outline-none focus:ring-2 focus:ring-orange-400
+               transition duration-200" // THEME CHANGE
             >
               Preview
             </button>
-
           </div>
         </>
       )}

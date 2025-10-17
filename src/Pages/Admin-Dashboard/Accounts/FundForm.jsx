@@ -18,80 +18,101 @@ const FundForm = ({ bank, onClose }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(`Fund Added to ${bank.bankName}:`, formData);
-    alert(`Fund Added to ${bank.bankName}`);
-    onClose(); // close modal
+    alert(`✅ Fund successfully added to ${bank.bankName}`);
+    onClose();
   };
 
   return (
-    <div className="fixed inset-0 bg-gray-900 bg-opacity-75 flex items-center justify-center p-4 z-50">
-      <div className="bg-white dark:bg-gray-800 rounded-3xl shadow-2xl w-full max-w-lg p-6 sm:p-8 transform transition-all duration-300 scale-100 opacity-100">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4">
+      <div className="relative bg-white dark:bg-gray-900 w-full max-w-lg rounded-3xl shadow-2xl p-8 animate-fadeIn border-t-[6px] border-orange-500 transition-all duration-500">
         
-        {/* Modal Header */}
-        <div className="flex justify-between items-center mb-6">
-          <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-100">
-            Add Fund to <span className="text-blue-600 dark:text-blue-400">{bank.bankName}</span>
+        {/* --- Header --- */}
+        <div className="flex justify-between items-center mb-6 border-b border-gray-200 dark:border-gray-700 pb-3">
+          <h2 className="text-2xl font-extrabold text-gray-800 dark:text-gray-100">
+            Add Fund —{" "}
+            <span className="text-orange-600 dark:text-orange-400">
+              {bank.bankName}
+            </span>
           </h2>
           <button
             onClick={onClose}
-            className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors duration-200"
+            className="text-gray-400 hover:text-orange-600 transition-all duration-300"
           >
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="w-7 h-7"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={2}
+            >
               <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
             </svg>
           </button>
         </div>
 
+        {/* --- Form --- */}
         <form onSubmit={handleSubmit} className="space-y-6">
-          
-          {/* Form Fields */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {/* Date & Fund Source */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
             <div>
-              <label className="block text-sm font-semibold text-gray-700 dark:text-gray-200 mb-1">Date & Time</label>
+              <label className="block text-sm font-semibold text-gray-700 dark:text-gray-200 mb-2">
+                Date & Time
+              </label>
               <input
                 type="datetime-local"
                 name="dateTime"
                 value={formData.dateTime}
                 onChange={handleChange}
-                className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-100 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors"
                 required
+                className="w-full p-3 rounded-xl border border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all"
               />
             </div>
+
             <div>
-              <label className="block text-sm font-semibold text-gray-700 dark:text-gray-200 mb-1">Fund Source</label>
+              <label className="block text-sm font-semibold text-gray-700 dark:text-gray-200 mb-2">
+                Fund Source
+              </label>
               <input
                 type="text"
                 name="fundSource"
                 value={formData.fundSource}
                 onChange={handleChange}
-                placeholder="e.g., Company, Client, etc."
-                className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-100 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors"
+                placeholder="e.g., Client, Company..."
                 required
+                className="w-full p-3 rounded-xl border border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all"
               />
             </div>
           </div>
 
+          {/* Depositor */}
           <div>
-            <label className="block text-sm font-semibold text-gray-700 dark:text-gray-200 mb-1">Depositor Name</label>
+            <label className="block text-sm font-semibold text-gray-700 dark:text-gray-200 mb-2">
+              Depositor Name
+            </label>
             <input
               type="text"
               name="depositorName"
               value={formData.depositorName}
               onChange={handleChange}
               placeholder="e.g., John Doe"
-              className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-100 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors"
               required
+              className="w-full p-3 rounded-xl border border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all"
             />
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {/* Mode + Transaction ID */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
             <div>
-              <label className="block text-sm font-semibold text-gray-700 dark:text-gray-200 mb-1">Mode of Deposit</label>
+              <label className="block text-sm font-semibold text-gray-700 dark:text-gray-200 mb-2">
+                Mode of Deposit
+              </label>
               <select
                 name="modeOfDeposit"
                 value={formData.modeOfDeposit}
                 onChange={handleChange}
-                className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-100 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors"
                 required
+                className="w-full p-3 rounded-xl border border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all"
               >
                 <option value="">Select Mode</option>
                 <option value="Cash">Cash</option>
@@ -101,47 +122,54 @@ const FundForm = ({ bank, onClose }) => {
                 <option value="UPI">UPI</option>
               </select>
             </div>
+
             <div>
-              <label className="block text-sm font-semibold text-gray-700 dark:text-gray-200 mb-1">Transaction ID</label>
+              <label className="block text-sm font-semibold text-gray-700 dark:text-gray-200 mb-2">
+                Transaction ID
+              </label>
               <input
                 type="text"
                 name="transactionId"
                 value={formData.transactionId}
                 onChange={handleChange}
                 placeholder="Enter Transaction ID"
-                className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-100 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors"
                 required
+                className="w-full p-3 rounded-xl border border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all"
               />
             </div>
           </div>
 
+          {/* Amount */}
           <div>
-            <label className="block text-sm font-semibold text-gray-700 dark:text-gray-200 mb-1">Amount</label>
+            <label className="block text-sm font-semibold text-gray-700 dark:text-gray-200 mb-2">
+              Amount (₹)
+            </label>
             <input
               type="number"
               name="amount"
               value={formData.amount}
               onChange={handleChange}
               placeholder="Enter Amount"
-              className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-100 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors"
               required
+              className="w-full p-3 rounded-xl border border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all"
             />
           </div>
 
           {/* Buttons */}
-          <div className="flex justify-end space-x-4 pt-4">
+          <div className="flex justify-end gap-4 pt-5">
             <button
               type="button"
               onClick={onClose}
-              className="px-6 py-3 bg-gray-200 text-gray-700 dark:bg-gray-700 dark:text-gray-200 font-semibold rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-300"
+              className="px-6 py-3 font-semibold rounded-xl border border-gray-300 text-gray-700 bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100 dark:hover:bg-gray-600 transition-all"
             >
               Cancel
             </button>
+
             <button
               type="submit"
-              className="px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 dark:hover:bg-blue-500 transition-colors duration-300"
+              className="px-6 py-3 font-semibold rounded-xl bg-gradient-to-r from-orange-500 to-orange-600 text-white shadow-lg hover:from-orange-600 hover:to-orange-700 focus:ring-4 focus:ring-orange-300 transition-all duration-300"
             >
-              Add Fund
+              + Add Fund
             </button>
           </div>
         </form>
