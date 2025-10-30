@@ -34,7 +34,7 @@ const Tooltip = ({ children, content, disabled }) => {
 // --- Navigation Data ---
 const mainNavigation = [
     { label: 'Dashboard', icon: <LuLayoutDashboard size={20} />, to: '/' },
-    { label: 'Employee', icon: <FaUsers size={20} />, to: '/TotalEmployee' },
+    { label: 'Employee', icon: <FaUsers size={20} />, to: '/Employee' },
     { label: 'Client', icon: <FaUserTie size={20} />, to: '/clients' },
     {
         label: 'Projects',

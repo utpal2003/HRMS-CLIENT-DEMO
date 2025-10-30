@@ -43,6 +43,10 @@ import ClientProfile from '../../Pages/Admin-Dashboard/Clients/ClientProfile';
 import AddProject from '../../Pages/Admin-Dashboard/projects/AddProject';
 import Workordergeneratedproject from '../../Pages/Admin-Dashboard/projects/workordergeneratedproject';
 import ProjectProfile from '../../Pages/Admin-Dashboard/projects/ProjectProfile';
+import EmployeeAttendance from '../../Pages/Admin-Dashboard/Employees/EmployeeAttendance';
+import EmployeePayslips from '../../Pages/Admin-Dashboard/Employees/EmployeePayslips';
+import EmployeeLeave from '../../Pages/Admin-Dashboard/Employees/EmployeeLeave';
+import EmployeeProfile from '../../Pages/Admin-Dashboard/Employees/EmployeeProfile';
 
 
 
@@ -69,8 +73,12 @@ const Dashboard = () => {
                     <Routes>
                         <Route path="/" element={<InitialDashboardContent />} />
                         {/* FOR EMPLOYEE */}
-                        <Route path="/TotalEmployee" element={<Getallemployee />} />
-                        {/* <Route path="/TotalEmployee/employeeprofile" element={<EmployeeProfile/>}/> */}
+                        <Route path="/Employee" element={<Getallemployee />} />
+                        <Route path="/Employee/employeeprofile/:id" element={<EmployeeProfile />} />
+
+                        <Route path='/Employee/employeeprofile/employee-attendance/:id' element={<EmployeeAttendance />} />
+                        <Route path='/Employee/employeeprofile/employee-payslips/:id' element={<EmployeePayslips />} />
+                        <Route path='/Employee/employeeprofile/employee-leave/:id' element={<EmployeeLeave />} />
 
 
                         {/* For clients section */}

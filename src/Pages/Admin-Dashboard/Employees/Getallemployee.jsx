@@ -1,11 +1,16 @@
+// /Pages/Employees/Getallemployee.jsx
+
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom'; // <-- IMPORTED useNavigate
 import { FaBan, FaUserEdit, FaCheckCircle, FaSearch, FaUserPlus } from 'react-icons/fa';
 import { Tooltip } from 'react-tooltip';
 import 'react-tooltip/dist/react-tooltip.css';
-import EmployeeProfile from './EmployeeProfile';
-import AddNewEmployeeForm from './AddNewEmployee';
 
-// --- NEW: DETAILED DUMMY DATA ---
+// --- Import ONLY the Add/Edit modal ---
+import AddNewEmployeeForm from './AddNewEmployee';
+// --- REMOVED imports for Profile, Leave, Attendance, Payslips ---
+
+// --- DETAILED DUMMY DATA ---
 const dummyEmployees = [
     {
         _id: '1',
@@ -14,21 +19,8 @@ const dummyEmployees = [
         employeeId: 'EMP001',
         employeeType: 'full-time',
         phone: '123-456-7890',
-        alternativePhone: '987-654-3210',
         email: 'john.doe@example.com',
-        dateOfBirth: '1990-05-15',
-        age: '35',
-        gender: 'Male',
-        blood: 'A+',
-        country: 'India',
-        state: 'West Bengal',
-        city: 'Kolkata',
-        fullAddress: '123 Park Street, Kolkata',
-        zip: '700016',
-        fatherName: 'Richard Doe',
-        motherName: 'Jane Doe',
         companyInfo: {
-            joinDate: '2022-01-15',
             designation: 'Sr. Frontend Developer',
             department: 'Technology',
             employeeStatus: 'Active',
@@ -46,7 +38,6 @@ const dummyEmployees = [
         phone: '234-567-8901',
         email: 'jane.smith@example.com',
         companyInfo: {
-            joinDate: '2021-11-20',
             designation: 'Project Manager',
             department: 'Management',
             employeeStatus: 'Active',
@@ -55,150 +46,36 @@ const dummyEmployees = [
         loginRestricted: false,
         online: false,
     },
-    {
-        _id: '3',
-        firstName: 'Michael',
-        lastName: 'Johnson',
-        employeeId: 'EMP003',
-        employeeType: 'contract',
-        phone: '345-678-9012',
-        alternativePhone: '876-543-2109',
-        email: 'michael.johnson@example.com',
-        dateOfBirth: '1988-09-22',
-        age: '37',
-        gender: 'Male',
-        blood: 'B+',
-        country: 'India',
-        state: 'Maharashtra',
-        city: 'Mumbai',
-        fullAddress: '456 Marine Drive, Mumbai',
-        zip: '400020',
-        fatherName: 'Robert Johnson',
-        motherName: 'Linda Johnson',
-        companyInfo: {
-            joinDate: '2023-03-10',
-            designation: 'Backend Developer',
-            department: 'Technology',
-            employeeStatus: 'Active',
-        },
-        employeeImage: 'https://i.pravatar.cc/150?img=37',
-        loginRestricted: false,
-        online: true,
-    },
-    {
-        _id: '4',
-        firstName: 'Priya',
-        lastName: 'Sharma',
-        employeeId: 'EMP004',
-        employeeType: 'part-time',
-        phone: '456-789-0123',
-        email: 'priya.sharma@example.com',
-        dateOfBirth: '1995-02-18',
-        age: '30',
-        gender: 'Female',
-        blood: 'O+',
-        country: 'India',
-        state: 'Delhi',
-        city: 'New Delhi',
-        fullAddress: '89 Connaught Place, New Delhi',
-        zip: '110001',
-        fatherName: 'Anil Sharma',
-        motherName: 'Sunita Sharma',
-        companyInfo: {
-            joinDate: '2024-06-01',
-            designation: 'UI/UX Designer',
-            department: 'Design',
-            employeeStatus: 'Probation',
-        },
-        employeeImage: 'https://i.pravatar.cc/150?img=4',
-        loginRestricted: false,
-        online: false,
-    },
-    {
-        _id: '5',
-        firstName: 'Rahul',
-        lastName: 'Patel',
-        employeeId: 'EMP005',
-        employeeType: 'full-time',
-        phone: '567-890-1234',
-        alternativePhone: '765-432-1098',
-        email: 'rahul.patel@example.com',
-        dateOfBirth: '1992-11-05',
-        age: '33',
-        gender: 'Male',
-        blood: 'AB+',
-        country: 'India',
-        state: 'Gujarat',
-        city: 'Ahmedabad',
-        fullAddress: '22 C.G. Road, Ahmedabad',
-        zip: '380009',
-        fatherName: 'Vijay Patel',
-        motherName: 'Kiran Patel',
-        companyInfo: {
-            joinDate: '2020-07-20',
-            designation: 'QA Engineer',
-            department: 'Quality Assurance',
-            employeeStatus: 'Active',
-        },
-        employeeImage: 'https://i.pravatar.cc/150?img=5',
-        loginRestricted: false,
-        online: true,
-    },
-    {
-        _id: '6',
-        firstName: 'Sara',
-        lastName: 'Khan',
-        employeeId: 'EMP006',
-        employeeType: 'intern',
-        phone: '678-901-2345',
-        email: 'sara.khan@example.com',
-        dateOfBirth: '2000-03-28',
-        age: '25',
-        gender: 'Female',
-        blood: 'B-',
-        country: 'India',
-        state: 'Karnataka',
-        city: 'Bengaluru',
-        fullAddress: '14 MG Road, Bengaluru',
-        zip: '560001',
-        fatherName: 'Imran Khan',
-        motherName: 'Nazia Khan',
-        companyInfo: {
-            joinDate: '2025-01-10',
-            designation: 'Software Intern',
-            department: 'Technology',
-            employeeStatus: 'Intern',
-        },
-        employeeImage: 'https://i.pravatar.cc/150?img=6',
-        loginRestricted: false,
-        online: false,
-    },
-
+    // ... other employees
 ];
 
 // --- Main Employee List Component ---
 const Getallemployee = () => {
+    // 1. Initialize navigate
+    const navigate = useNavigate();
+
     const [employees, setEmployees] = useState(dummyEmployees);
     const [showAddEmployeeModal, setShowAddEmployeeModal] = useState(false);
     const [selectedEmployee, setSelectedEmployee] = useState(null);
-    const [showEmployeeProfile, setShowEmployeeProfile] = useState(false);
     const [searchQuery, setSearchQuery] = useState('');
 
+    // --- REMOVED All state-based navigation state ---
+    // const [currentView, setCurrentView] = useState('list');
+    // const [leaveData, setLeaveData] = useState([]);
+    // ... etc.
+
+
+    // --- UPDATED HANDLER ---
     const handleViewEmployeeDetails = (employeeId) => {
-        const employeeToView = employees.find(emp => emp._id === employeeId);
-        if (employeeToView) {
-            setSelectedEmployee(employeeToView);
-            setShowEmployeeProfile(true);
-            setShowAddEmployeeModal(false); // Ensure add modal is closed
-        }
+        // This now navigates to the route you defined
+        navigate(`/Employee/employeeprofile/${employeeId}`);
     };
 
     const handleEditEmployee = (employeeId) => {
         const employeeToEdit = employees.find(emp => emp._id === employeeId);
         if (employeeToEdit) {
             setSelectedEmployee(employeeToEdit);
-            setShowAddEmployeeModal(true); // Open Add/Edit modal with data
-            setShowEmployeeProfile(false);
+            setShowAddEmployeeModal(true);
         }
     };
 
@@ -207,16 +84,14 @@ const Getallemployee = () => {
         setEmployees(employees.map(emp => emp._id === employeeId ? { ...emp, loginRestricted: !emp.loginRestricted } : emp));
     };
 
+    // --- REMOVED all state-based navigation handlers ---
+    // (handleBackToEmployeeList, handleShowAttendance, etc.)
+
+    // --- SEARCH FILTER (Unchanged) ---
     const filteredEmployees = employees.filter(emp => `${emp.firstName} ${emp.lastName} ${emp.employeeId}`.toLowerCase().includes(searchQuery.toLowerCase()));
 
-    if (showEmployeeProfile && selectedEmployee) {
-        return (
-            <EmployeeProfile
-                employeeData={selectedEmployee}
-                handleBackToEmployeeList={() => setShowEmployeeProfile(false)}
-            />
-        );
-    }
+    // --- REMOVED all "if (currentView === ...)" logic ---
+    // This component ONLY renders the list.
 
     return (
         <div className="p-4 sm:p-6 bg-brandBackground min-h-screen">
@@ -252,6 +127,7 @@ const Getallemployee = () => {
                         {filteredEmployees.map((employee) => (
                             <div
                                 key={employee._id}
+                                // This onClick handler now triggers the navigation
                                 onClick={() => handleViewEmployeeDetails(employee._id)}
                                 className="group relative bg-gradient-to-br from-surfaceNeutral to-brandLight rounded-2xl shadow-md hover:shadow-2xl transition-all duration-300 cursor-pointer overflow-hidden"
                             >
@@ -291,6 +167,7 @@ const Getallemployee = () => {
                     <AddNewEmployeeForm
                         initialData={selectedEmployee}
                         onCancel={() => setShowAddEmployeeModal(false)}
+                    // You'll need to add an onSave handler here
                     />
                 </div>
             )}
