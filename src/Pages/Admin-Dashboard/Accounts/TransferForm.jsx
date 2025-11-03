@@ -21,26 +21,25 @@ const TransferForm = ({ fromBank, onClose, onTransfer }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Transfer Data:", formData);
     onTransfer(formData); // pass back to parent
   };
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4">
       <div className="bg-white p-6 rounded-2xl shadow-lg w-full max-w-md">
-        <h2 className="text-xl font-bold mb-4">
+        <h2 className="text-xl font-bold mb-4 text-brandPrimary">
           Internal Transfer - {fromBank.bankName}
         </h2>
 
         <form onSubmit={handleSubmit} className="space-y-4">
           {/* Select Bank */}
           <div>
-            <label className="block text-sm font-medium">Select Bank</label>
+            <label className="block text-sm font-medium text-secondaryText">Select Bank</label>
             <select
               name="toBank"
               value={formData.toBank}
               onChange={handleChange}
-              className="w-full p-2 border rounded-lg"
+              className="w-full p-2 border border-secondary rounded-lg bg-white text-secondaryText focus:ring-brandPrimary focus:border-brandPrimary"
               required
             >
               <option value="">Select Bank</option>
@@ -54,43 +53,51 @@ const TransferForm = ({ fromBank, onClose, onTransfer }) => {
 
           {/* Amount */}
           <div>
-            <label className="block text-sm font-medium">Amount</label>
+            <label className="block text-sm font-medium text-secondaryText">Amount</label>
             <input
               type="number"
               name="amount"
               value={formData.amount}
               onChange={handleChange}
               placeholder="Enter Amount"
-              className="w-full p-2 border rounded-lg"
+              className="w-full p-2 border border-secondary rounded-lg bg-white text-secondaryText focus:ring-brandPrimary focus:border-brandPrimary"
               required
             />
           </div>
 
           {/* Note */}
           <div>
-            <label className="block text-sm font-medium">Note</label>
+            <label className="block text-sm font-medium text-secondaryText">Note</label>
             <input
               type="text"
               name="note"
               value={formData.note}
               onChange={handleChange}
               placeholder="Note (optional)"
-              className="w-full p-2 border rounded-lg"
+              className="w-full p-2 border border-secondary rounded-lg bg-white text-secondaryText focus:ring-brandPrimary focus:border-brandPrimary"
             />
           </div>
 
           {/* Buttons */}
-          <div className="flex justify-between">
+          <div className="flex justify-end gap-4 pt-2">
             <button
               type="button"
               onClick={onClose}
-              className="px-4 py-2 bg-gray-400 text-white rounded-lg hover:bg-gray-500"
+              className="px-6 py-2 bg-errorLight text-error border-2 border-error 
+               rounded-full shadow-md font-semibold text-sm
+               hover:bg-error hover:text-white hover:shadow-lg 
+               focus:outline-none focus:ring-2 focus:ring-error
+               transition duration-200"
             >
               Cancel
             </button>
             <button
               type="submit"
-              className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700"
+              className="px-6 py-2 bg-brandLight text-brandText border-2 border-brandPrimary 
+               rounded-full shadow-md font-semibold text-sm
+               hover:bg-brandPrimary hover:text-white hover:shadow-lg 
+               focus:outline-none focus:ring-2 focus:ring-brandPrimary
+               transition duration-200"
             >
               Transfer
             </button>

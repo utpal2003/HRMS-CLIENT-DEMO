@@ -65,20 +65,20 @@ const mainNavigation = [
             // { label: 'Performance', icon: <MdOutlineSpeed />, to: '/HR/performance' },
             // { label: 'Interview', icon: <FaUserTie />, to: '/HR/interview' },
             // { label: 'ID Card', icon: <FaRegIdCard />, to: '/HR/idcard' },
+            // {
+            //     label: 'Letter', icon: <MdOutlineMailOutline />, subItems: [
+            //         { label: 'Offer Letter', icon: <TbFileCertificate />, to: '/HR/offer-letter' }, // Example path
+            //         { label: 'Termination Letter', icon: <MdOutlineCancel />, to: '/HR/termination-letter' }, // Example path
+            //     ]
+            // },
             {
-                label: 'Letter', icon: <MdOutlineMailOutline />, subItems: [
-                    { label: 'Offer Letter', icon: <TbFileCertificate />, to: '/' },
-                    { label: 'Termination Letter', icon: <MdOutlineCancel />, to: '/' },
+                label: 'Report', icon: <MdReport />, subItems: [
+                    // { label: 'Leave Report', icon: <MdOutlineDirectionsRun />, to: '/HR/leave-report' },
+                    { label: 'Salary Report', icon: <RiMoneyRupeeCircleFill />, to: '/HR/salaryreport' }
                 ]
             },
             // {
-            //     label: 'Report', icon: <MdReport />, subItems: [
-            //         { label: 'Leave Report', icon: <MdOutlineDirectionsRun />, to: '/' },
-            //         { label: 'Salary Report', icon: <RiMoneyRupeeCircleFill />, to: '/HR/salaryreport' }
-            //     ]
-            // },
-            // {
-            //     label: 'Others', icon: <MdReadMore />, to: '/'
+            //     label: 'Others', icon: <MdReadMore />, to: '/'
             // }
         ]
     },
@@ -153,7 +153,7 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
         setOpenSubmenus(prev => ({ ...prev, [label]: !prev[label] }));
     };
 
-    // --- RENDER MENU ITEMS (Recursive function) ---
+    // --- RENDER MENU ITEMS (Now fully recursive) ---
     const renderMenuItems = (items) => {
         return items.map((item) => {
             const hasSubItems = !!item.subItems?.length;
@@ -179,18 +179,78 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
                         </Tooltip>
                         <div className={`overflow-hidden transition-all duration-300 ease-in-out ${isSubmenuOpen ? 'max-h-[1000px]' : 'max-h-0'}`}>
                             <div className={`pt-2 space-y-1 border-l-2 border-orange-200 ${isOpen ? "ml-5" : "ml-4"}`}>
-                                {item.subItems.map(subItem => (
-                                    <Tooltip key={subItem.label} content={subItem.label} disabled={isOpen}>
-                                        <Link
-                                            to={subItem.to}
-                                            onClick={handleLinkClick}
-                                            className={`flex items-center space-x-3 w-full text-left pr-2 py-2 rounded-md transition-colors duration-200 text-sm font-medium truncate ${isOpen ? "pl-8" : "pl-6"} ${location.pathname === subItem.to ? activeClasses : inactiveClasses}`}
-                                        >
-                                            {subItem.icon}
-                                            {isOpen && <span>{subItem.label}</span>}
-                                        </Link>
-                                    </Tooltip>
-                                ))}
+
+                                {
+                                    // --- START OF FIX ---
+                                    // This section is now recursive to handle nested children
+                                }
+                                {item.subItems.map(subItem => {
+                                    const hasNestedSubItems = !!subItem.subItems?.length;
+                                    const isNestedSubmenuOpen = openSubmenus[subItem.label];
+
+                                    const isNestedChildActive = hasNestedSubItems ? findActivePath(subItem.subItems, location.pathname).length > 0 : false;
+                                    const isSubItemActive = (subItem.to === location.pathname) || isNestedChildActive;
+
+                                    // Base styles for this sub-level (Level 1)
+                                    const subBaseClasses = `flex items-center space-x-3 w-full text-left pr-2 py-2 rounded-md transition-colors duration-200 text-sm font-medium truncate ${isOpen ? "pl-8" : "pl-6"}`;
+                                    const subActiveClasses = "bg-orange-100 text-orange-500";
+                                    const subInactiveClasses = "text-orange-900 hover:bg-orange-100 hover:text-orange-500";
+
+
+                                    if (hasNestedSubItems) {
+                                        // This is a Level 2 Parent (e.g., "Letter")
+                                        return (
+                                            <div key={subItem.label}>
+                                                <Tooltip content={subItem.label} disabled={isOpen}>
+                                                    <button
+                                                        onClick={() => toggleSubmenu(subItem.label)}
+                                                        className={`${subBaseClasses} justify-between ${isSubItemActive ? subActiveClasses : subInactiveClasses}`}
+                                                    >
+                                                        <div className="flex items-center space-x-3">
+                                                            {subItem.icon}
+                                                            {isOpen && <span>{subItem.label}</span>}
+                                                        </div>
+                                                        {isOpen && <FaChevronDown className={`transition-transform duration-300 ${isNestedSubmenuOpen ? "rotate-180" : ""}`} size={12} />}
+                                                    </button>
+                                                </Tooltip>
+                                                <div className={`overflow-hidden transition-all duration-300 ease-in-out ${isNestedSubmenuOpen ? 'max-h-[1000px]' : 'max-h-0'}`}>
+                                                    {/* This is the 3rd level (e.g., "Offer Letter") */}
+                                                    <div className={`pt-2 space-y-1 border-l-2 border-orange-200 ${isOpen ? "ml-8" : "ml-7"}`}>
+                                                        {subItem.subItems.map(nestedItem => (
+                                                            <Tooltip key={nestedItem.label} content={nestedItem.label} disabled={isOpen}>
+                                                                <Link
+                                                                    to={nestedItem.to}
+                                                                    onClick={handleLinkClick}
+                                                                    className={`flex items-center space-x-3 w-full text-left pr-2 py-2 rounded-md transition-colors duration-200 text-sm font-medium truncate ${isOpen ? "pl-12" : "pl-10"} ${location.pathname === nestedItem.to ? subActiveClasses : subInactiveClasses}`} // Extra padding
+                                                                >
+                                                                    {nestedItem.icon}
+                                                                    {isOpen && <span>{nestedItem.label}</span>}
+                                                                </Link>
+                                                            </Tooltip>
+                                                        ))}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        );
+                                    }
+
+                                    // This is a Level 1 Link (e.g., "Verify Employee")
+                                    return (
+                                        <Tooltip key={subItem.label} content={subItem.label} disabled={isOpen}>
+                                            <Link
+                                                to={subItem.to}
+                                                onClick={handleLinkClick}
+                                                className={`${subBaseClasses} ${isSubItemActive ? subActiveClasses : subInactiveClasses}`}
+                                            >
+                                                {subItem.icon}
+                                                {isOpen && <span>{subItem.label}</span>}
+                                            </Link>
+                                        </Tooltip>
+                                    );
+                                })}
+                                {
+                                    // --- END OF FIX ---
+                                }
                             </div>
                         </div>
                     </div>

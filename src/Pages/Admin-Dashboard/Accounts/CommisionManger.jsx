@@ -87,7 +87,7 @@ const CommisionManger = () => {
   const [selectedAgent, setSelectedAgent] = useState(null);
   const [expandedPayments, setExpandedPayments] = useState({});
 
-  // Utility → Stats for Agent (Functionality unchanged)
+  // Utility -> Stats for Agent (Functionality unchanged)
   const getAgentStats = (agentId) => {
     const agentPayments = payments.filter(
       (p) => p.agent_id === agentId && p.type === "Commission"
@@ -99,7 +99,7 @@ const CommisionManger = () => {
     return { total, pending };
   };
 
-  // Utility → Get Installments for a Payment (Functionality unchanged)
+  // Utility -> Get Installments for a Payment (Functionality unchanged)
   const getInstallments = (paymentId) =>
     installments.filter((i) => i.payment_id === paymentId);
 
@@ -111,38 +111,48 @@ const CommisionManger = () => {
     }));
   };
 
-  // (Functionality unchanged - semantic colors)
+  // Helper to format currency
+  const formatCurrency = (amount) => {
+    return new Intl.NumberFormat('en-IN', {
+      style: 'currency',
+      currency: 'INR',
+    }).format(amount);
+  };
+
+  // --- THEME CHANGE ---
+  // Updated to use theme colors
   const getStatusIcon = (status) => {
     switch (status) {
       case "Completed":
       case "Paid":
-        return <FaCheckCircle className="text-green-500" />;
+        return <FaCheckCircle className="text-success" />;
       case "Pending":
-        return <FaClock className="text-yellow-500" />;
+        return <FaClock className="text-brandPrimary" />; // Changed from yellow
       default:
         return null;
     }
   };
 
-  // (Functionality unchanged - semantic colors)
+  // --- THEME CHANGE ---
+  // Updated to use theme colors
   const getStatusClasses = (status) => {
     switch (status) {
       case "Completed":
       case "Paid":
-        return "bg-green-100 text-green-800";
+        return "bg-successLight text-success"; // Changed from green
       case "Pending":
-        return "bg-yellow-100 text-yellow-800";
+        return "bg-brandLight text-brandText"; // Changed from yellow
       default:
-        return "bg-gray-100 text-gray-800";
+        return "bg-surfaceNeutral text-secondaryText"; // Changed from gray
     }
   };
 
   return (
-    <div className="min-h-screen bg-background dark:bg-gray-900 p-4 sm:p-6 lg:p-8 font-sans">
+    <div className="min-h-screen bg-brandBackground p-4 sm:p-6 lg:p-8 font-sans">
       {!selectedAgent ? (
         // --- Agent Card List ---
         <div className="container mx-auto">
-          <h1 className="text-3xl sm:text-4xl font-extrabold text-orange-600 dark:text-orange-400 mb-6 sm:mb-8 text-center"> {/* THEME CHANGE */}
+          <h1 className="text-3xl sm:text-4xl font-extrabold text-brandPrimary mb-6 sm:mb-8 text-center">
             Commission Management
           </h1>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
@@ -152,40 +162,40 @@ const CommisionManger = () => {
                 <div
                   key={agent.id}
                   onClick={() => setSelectedAgent(agent)}
-                  className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 cursor-pointer transform transition duration-300 hover:scale-105 hover:shadow-2xl flex flex-col justify-between"
+                  className="bg-white rounded-xl shadow-lg p-6 cursor-pointer transform transition duration-300 hover:scale-105 hover:shadow-2xl flex flex-col justify-between border border-secondary"
                 >
                   <div>
                     <div className="flex items-center space-x-4 mb-4">
-                      <FaUserCircle className="text-5xl text-orange-500" /> {/* THEME CHANGE */}
+                      <FaUserCircle className="text-5xl text-brandPrimary" />
                       <div>
-                        <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-200">
+                        <h2 className="text-2xl font-bold text-brandText">
                           {agent.name}
                         </h2>
-                        <p className="text-sm text-gray-500 dark:text-gray-400">
+                        <p className="text-sm text-secondaryText">
                           {agent.email}
                         </p>
                       </div>
                     </div>
-                    <div className="space-y-2 text-gray-700 dark:text-gray-300">
+                    <div className="space-y-2 text-secondaryText">
                       <div className="flex items-center">
-                        <FaPercentage className="text-orange-400 mr-2" /> {/* THEME CHANGE */}
+                        <FaPercentage className="text-brandPrimary mr-2" />
                         <span className="font-semibold">Commission Rate:</span>
                         <span className="ml-2 font-medium">
                           {agent.commission_rate}%
                         </span>
                       </div>
                       <div className="flex items-center">
-                        <FaMoneyBillWave className="text-green-500 mr-2" />
+                        <FaMoneyBillWave className="text-success mr-2" />
                         <span className="font-semibold">Total Commission:</span>
-                        <span className="ml-2 font-medium text-green-600">
-                          ₹{total.toLocaleString()}
+                        <span className="ml-2 font-medium text-success">
+                          {formatCurrency(total)}
                         </span>
                       </div>
                       <div className="flex items-center">
-                        <FaClock className="text-yellow-500 mr-2" />
+                        <FaClock className="text-brandPrimary mr-2" />
                         <span className="font-semibold">Pending Amount:</span>
-                        <span className="ml-2 font-medium text-yellow-600">
-                          ₹{pending.toLocaleString()}
+                        <span className="ml-2 font-medium text-brandPrimary">
+                          {formatCurrency(pending)}
                         </span>
                       </div>
                     </div>
@@ -198,31 +208,31 @@ const CommisionManger = () => {
       ) : (
         // --- Agent Details Page ---
         <div className="container mx-auto">
-          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 sm:p-8">
+          <div className="bg-white rounded-xl shadow-lg p-6 sm:p-8 border border-secondary">
             <button
               onClick={() => setSelectedAgent(null)}
-              className="flex items-center mb-6 text-orange-600 hover:text-orange-800 dark:text-orange-500 dark:hover:text-orange-400 transition-colors" // THEME CHANGE
+              className="flex items-center mb-6 text-brandPrimary hover:text-brandHover transition-colors"
             >
               <FaArrowLeft className="mr-2" />
               <span className="font-semibold">Back to Agents</span>
             </button>
 
-            <div className="flex items-center space-x-4 mb-6 border-b dark:border-gray-700 pb-4">
-              <FaUserCircle className="text-6xl text-orange-500" /> {/* THEME CHANGE */}
+            <div className="flex items-center space-x-4 mb-6 border-b border-secondary pb-4">
+              <FaUserCircle className="text-6xl text-brandPrimary" />
               <div>
-                <h2 className="text-3xl font-bold text-gray-800 dark:text-gray-200">
+                <h2 className="text-3xl font-bold text-brandText">
                   {selectedAgent.name}
                 </h2>
-                <p className="text-md text-gray-500 dark:text-gray-400">
+                <p className="text-md text-secondaryText">
                   {selectedAgent.email}
                 </p>
-                <p className="text-md text-gray-500 dark:text-gray-400">
+                <p className="text-md text-secondaryText">
                   {selectedAgent.phone}
                 </p>
               </div>
             </div>
 
-            <h3 className="text-2xl font-bold text-gray-800 dark:text-gray-200 mt-8 mb-4">
+            <h3 className="text-2xl font-bold text-brandText mt-8 mb-4">
               Projects & Payments
             </h3>
             <div className="space-y-4">
@@ -231,30 +241,27 @@ const CommisionManger = () => {
                 .map((p) => {
                   const inst = getInstallments(p.id);
                   const isExpanded = expandedPayments[p.id];
-                  const dueCount = inst.filter(
-                    (i) => i.status === "Pending"
-                  ).length;
-
+                  
                   return (
                     <div
                       key={p.id}
-                      className="border border-gray-200 dark:border-gray-700 rounded-lg p-4 bg-gray-50 dark:bg-gray-800 transition-all duration-300"
+                      className="border border-secondary rounded-lg bg-white transition-all duration-300 overflow-hidden"
                     >
                       <div
-                        className="flex items-center justify-between cursor-pointer"
+                        className="flex items-center justify-between cursor-pointer p-4 hover:bg-surfaceNeutral"
                         onClick={() => togglePaymentExpansion(p.id)}
                       >
                         <div className="flex-grow">
                           <div className="flex items-center space-x-3">
-                            <FaMoneyBillWave className="text-xl text-green-500" />
-                            <h4 className="font-bold text-lg text-gray-800 dark:text-gray-200">
+                            <FaMoneyBillWave className="text-xl text-success" />
+                            <h4 className="font-bold text-lg text-brandText">
                               {p.project}
                             </h4>
                           </div>
-                          <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
+                          <p className="text-sm text-secondaryText mt-1 pl-8">
                             Amount:{" "}
                             <span className="font-medium">
-                              ₹{p.amount.toLocaleString()}
+                              {formatCurrency(p.amount)}
                             </span>
                           </p>
                         </div>
@@ -267,32 +274,32 @@ const CommisionManger = () => {
                             {getStatusIcon(p.status)}
                             <span className="ml-1">{p.status}</span>
                           </span>
-                          <button className="text-gray-500 dark:text-gray-400">
+                          <button className="text-secondaryText">
                             {isExpanded ? <FaChevronUp /> : <FaChevronDown />}
                           </button>
                         </div>
                       </div>
 
                       {isExpanded && (
-                        <div className="mt-4 border-t dark:border-gray-700 pt-4">
-                          <h5 className="font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                        <div className="border-t border-secondary p-4 bg-surfaceNeutral">
+                          <h5 className="font-semibold text-brandText mb-2">
                             Installments:
                           </h5>
                           <div className="space-y-2">
                             {inst.map((i) => (
                               <div
                                 key={i.id}
-                                className="flex items-center space-x-3 text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 p-3 rounded-md shadow-sm"
+                                className="flex flex-wrap items-center space-x-3 text-secondaryText bg-white p-3 rounded-md shadow-sm border border-secondary"
                               >
                                 <span className="text-sm font-medium">
                                   #{i.installment_no}
                                 </span>
-                                <span className="text-sm font-medium">
-                                  ₹{i.amount.toLocaleString()}
+                                <span className="text-sm font-medium text-brandText">
+                                  {formatCurrency(i.amount)}
                                 </span>
                                 <span className="flex-grow"></span>
-                                <div className="flex items-center space-x-1 text-sm text-gray-600 dark:text-gray-400">
-                                  <FaCalendarAlt className="text-gray-400" />
+                                <div className="flex items-center space-x-1 text-sm">
+                                  <FaCalendarAlt className="text-secondaryText opacity-75" />
                                   <span>Due: {i.due_date}</span>
                                 </div>
                                 <span

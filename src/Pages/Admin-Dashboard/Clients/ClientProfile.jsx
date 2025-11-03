@@ -50,19 +50,19 @@ const ClientProfile = () => {
         {
             title: "Quotations",
             icon: <FaFileInvoice className="text-gray-400 dark:text-gray-500" />,
-            listRoute: `/clients/${id}/quotations`,
+            listRoute: `/client/quotations`,
             addRoute: `/quotations/add?clientId=${id}`
         },
         {
             title: "Orders",
             icon: <FaBoxOpen className="text-gray-400 dark:text-gray-500" />,
-            listRoute: `/clients/${id}/orders`,
+            listRoute: `/client/orders`,
             addRoute: `/order/add-order?clientId=${id}`
         },
         {
             title: "Work Orders",
             icon: <FaBriefcase className="text-gray-400 dark:text-gray-500" />,
-            listRoute: `/clients/${id}/work-orders`,
+            listRoute: `/client/workorder`,
             addRoute: `/workorder/add-new?clientId=${id}`
         },
         {

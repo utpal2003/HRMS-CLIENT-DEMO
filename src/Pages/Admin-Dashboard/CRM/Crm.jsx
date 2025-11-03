@@ -116,7 +116,7 @@ const Crm = () => {
       </div>
 
 
-      <div className="bg-background dark:bg-gray-800 p-4 rounded-xl shadow-sm">
+      <div className="bg-[#fff7ed] dark:bg-gray-800 p-4 rounded-xl shadow-sm">
         <LeadList
           leads={leads}
           onRemove={handleRemoveLead}

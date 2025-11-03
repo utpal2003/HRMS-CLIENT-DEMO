@@ -67,9 +67,9 @@ const AddReceipt = () => {
   };
 
   return (
-    <div className="flex justify-center items-center p-6 bg-gray-100 dark:bg-gray-900 min-h-screen">
-      <div className="w-full max-w-6xl bg-white dark:bg-gray-800 rounded-xl shadow-2xl p-8">
-        <h2 className="text-3xl font-bold text-center mb-6 text-gray-800 dark:text-gray-100">
+    <div className="flex justify-center items-center p-6 bg-brandBackground min-h-screen">
+      <div className="w-full max-w-6xl bg-white rounded-xl shadow-lg border border-secondary p-8">
+        <h2 className="text-3xl font-bold text-center mb-6 text-brandPrimary">
           Create New Receipt 📄
         </h2>
 
@@ -79,16 +79,16 @@ const AddReceipt = () => {
             <div className="flex flex-col">
               <label
                 htmlFor="clientId"
-                className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+                className="block text-sm font-medium text-secondaryText mb-1"
               >
-                Client <span className="text-red-500">*</span>
+                Client <span className="text-error">*</span>
               </label>
               <select
                 id="clientId"
                 name="clientId"
                 value={formData.clientId}
                 onChange={handleChange}
-                className="w-full p-3 border border-gray-300 rounded-lg shadow-sm dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+                className="w-full p-3 border border-secondary rounded-lg shadow-sm bg-white text-secondaryText focus:border-brandPrimary focus:ring-1 focus:ring-brandPrimary"
                 required
               >
                 <option value="">Select Client</option>
@@ -104,16 +104,16 @@ const AddReceipt = () => {
             <div className="flex flex-col">
               <label
                 htmlFor="projectName"
-                className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+                className="block text-sm font-medium text-secondaryText mb-1"
               >
-                Project <span className="text-red-500">*</span>
+                Project <span className="text-error">*</span>
               </label>
               <select
                 id="projectName"
                 name="projectName"
                 value={formData.projectName}
                 onChange={handleChange}
-                className="w-full p-3 border border-gray-300 rounded-lg shadow-sm dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+                className="w-full p-3 border border-secondary rounded-lg shadow-sm bg-white text-secondaryText focus:border-brandPrimary focus:ring-1 focus:ring-brandPrimary"
                 required
                 disabled={!formData.clientId}
               >
@@ -134,7 +134,7 @@ const AddReceipt = () => {
             <div className="flex flex-col">
               <label
                 htmlFor="bankAccount"
-                className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+                className="block text-sm font-medium text-secondaryText mb-1"
               >
                 Bank Account
               </label>
@@ -145,7 +145,7 @@ const AddReceipt = () => {
                 value={formData.bankAccount}
                 onChange={handleChange}
                 placeholder="e.g., HDFC-XXXX1234"
-                className="w-full p-3 border border-gray-300 rounded-lg shadow-sm dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+                className="w-full p-3 border border-secondary rounded-lg shadow-sm bg-white text-secondaryText focus:border-brandPrimary focus:ring-1 focus:ring-brandPrimary"
               />
             </div>
 
@@ -153,7 +153,7 @@ const AddReceipt = () => {
             <div className="flex flex-col">
               <label
                 htmlFor="paymentDate"
-                className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+                className="block text-sm font-medium text-secondaryText mb-1"
               >
                 Payment Date
               </label>
@@ -163,7 +163,7 @@ const AddReceipt = () => {
                 name="paymentDate"
                 value={formData.paymentDate}
                 onChange={handleChange}
-                className="w-full p-3 border border-gray-300 rounded-lg shadow-sm dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+                className="w-full p-3 border border-secondary rounded-lg shadow-sm bg-white text-secondaryText focus:border-brandPrimary focus:ring-1 focus:ring-brandPrimary"
               />
             </div>
 
@@ -171,7 +171,7 @@ const AddReceipt = () => {
             <div className="flex flex-col">
               <label
                 htmlFor="amountPaid"
-                className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+                className="block text-sm font-medium text-secondaryText mb-1"
               >
                 Amount Paid
               </label>
@@ -182,7 +182,7 @@ const AddReceipt = () => {
                 value={formData.amountPaid}
                 onChange={handleChange}
                 placeholder="e.g., 5000"
-                className="w-full p-3 border border-gray-300 rounded-lg shadow-sm dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+                className="w-full p-3 border border-secondary rounded-lg shadow-sm bg-white text-secondaryText focus:border-brandPrimary focus:ring-1 focus:ring-brandPrimary"
               />
             </div>
 
@@ -190,7 +190,7 @@ const AddReceipt = () => {
             <div className="flex flex-col">
               <label
                 htmlFor="amountDue"
-                className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+                className="block text-sm font-medium text-secondaryText mb-1"
               >
                 Amount Due
               </label>
@@ -201,7 +201,7 @@ const AddReceipt = () => {
                 value={formData.amountDue}
                 onChange={handleChange}
                 placeholder="e.g., 0"
-                className="w-full p-3 border border-gray-300 rounded-lg shadow-sm dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+                className="w-full p-3 border border-secondary rounded-lg shadow-sm bg-white text-secondaryText focus:border-brandPrimary focus:ring-1 focus:ring-brandPrimary"
               />
             </div>
 
@@ -209,7 +209,7 @@ const AddReceipt = () => {
             <div className="flex flex-col">
               <label
                 htmlFor="modeOfPayment"
-                className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+                className="block text-sm font-medium text-secondaryText mb-1"
               >
                 Payment Mode
               </label>
@@ -218,7 +218,7 @@ const AddReceipt = () => {
                 name="modeOfPayment"
                 value={formData.modeOfPayment}
                 onChange={handleChange}
-                className="w-full p-3 border border-gray-300 rounded-lg shadow-sm dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+                className="w-full p-3 border border-secondary rounded-lg shadow-sm bg-white text-secondaryText focus:border-brandPrimary focus:ring-1 focus:ring-brandPrimary"
               >
                 <option value="">Select a mode...</option>
                 <option value="Cash">Cash</option>
@@ -232,9 +232,9 @@ const AddReceipt = () => {
             <div className="flex flex-col">
               <label
                 htmlFor="transactionId"
-                className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+                className="block text-sm font-medium text-secondaryText mb-1"
               >
-                Transaction ID <span className="text-red-500">*</span>
+                Transaction ID <span className="text-error">*</span>
               </label>
               <input
                 type="text"
@@ -243,7 +243,7 @@ const AddReceipt = () => {
                 value={formData.transactionId}
                 onChange={handleChange}
                 placeholder="e.g., TXN123456"
-                className="w-full p-3 border border-gray-300 rounded-lg shadow-sm dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+                className="w-full p-3 border border-secondary rounded-lg shadow-sm bg-white text-secondaryText focus:border-brandPrimary focus:ring-1 focus:ring-brandPrimary"
                 required
               />
             </div>
@@ -251,7 +251,7 @@ const AddReceipt = () => {
 
           <button
             type="submit"
-            className="w-full py-3 bg-indigo-600 text-white font-semibold rounded-lg shadow-md hover:bg-indigo-700 transition duration-300 dark:bg-indigo-500 dark:hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
+            className="w-full py-3 bg-brandPrimary text-white font-semibold rounded-lg shadow-md hover:bg-brandHover transition duration-300 focus:outline-none focus:ring-2 focus:ring-brandPrimary focus:ring-offset-2"
           >
             Save & Send
           </button>

@@ -95,7 +95,7 @@ const BankList = ({ dashboardName }) => {
   const [selectedBankForFund, setSelectedBankForFund] = useState(null);
 
   return (
-    <div className="min-h-screen p-8 sm:p-12 bg-background dark:bg-gray-900">
+    <div className="min-h-screen p-6 sm:p-8  dark:bg-gray-900">
       <div className="max-w-6xl mx-auto">
         <h1 className="text-3xl sm:text-4xl font-bold text-orange-600 dark:text-orange-400 mb-8 sm:mb-10 text-center"> {/* THEME CHANGE */}
           Your Bank Accounts
@@ -107,7 +107,7 @@ const BankList = ({ dashboardName }) => {
               key={bank.id}
               className="bg-white dark:bg-gray-800 rounded-3xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 cursor-pointer border border-gray-200 dark:border-gray-700 group"
               onClick={() => // Re-enabled navigation
-                navigate(`/${dashboardName}/accounts/bankdetails`, {
+                navigate(`/accounts/bankdetails`, {
                   state: { bank },
                 })
               }

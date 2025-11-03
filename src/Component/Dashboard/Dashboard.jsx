@@ -11,7 +11,7 @@ import Order from '../../Pages/Admin-Dashboard/projects/Order';
 import WorkOrderList from '../../Pages/Admin-Dashboard/projects/workorders/WorkOrderList';
 import OffetLetter from '../../Pages/Admin-Dashboard/HR/OffetLetter';
 import TerminationLetter from '../../Pages/Admin-Dashboard/HR/TerminationLetter';
-import Leave from '../../Pages/Admin-Dashboard/HR/Leave';
+import Leave from '../../Pages/Admin-Dashboard/HR/Leave/Leave';
 import VerifyEmployee from '../../Pages/Admin-Dashboard/HR/VerifyEmployee';
 import Interview from '../../Pages/Admin-Dashboard/HR/Interview';
 import SalaryReport from '../../Pages/Admin-Dashboard/HR/SalaryReport';
@@ -50,7 +50,12 @@ import EmployeeProfile from '../../Pages/Admin-Dashboard/Employees/EmployeeProfi
 import WorkOrderForm from '../../Pages/Admin-Dashboard/projects/workorders/workOrderForm';
 import CreateQuotation from '../quotations/CreateQuotation';
 import WorkOrderProfile from '../../Pages/Admin-Dashboard/projects/workorders/WorkOrderProfile';
-
+import ClientQuotation from '../quotations/ClientQuotation';
+import ClientOrders from '../../Pages/Admin-Dashboard/Clients/ClientOrders';
+import ClientWorkorders from '../../Pages/Admin-Dashboard/Clients/ClientWorkorders';
+import BankDetails from '../../Pages/Admin-Dashboard/Accounts/BankDetails';
+import ReceiptManager from '../../Pages/Admin-Dashboard/Accounts/ReceiptManager'
+import AddReceipt from '../../Pages/Admin-Dashboard/Accounts/AddReceipt';
 
 
 const Dashboard = () => {
@@ -90,7 +95,9 @@ const Dashboard = () => {
                         <Route path="/clients/new" element={<AddClientForm />} />
                         <Route path="/clients/profile/:clientId" element={<ClientProfile />} />
                         <Route path="/clients/edit/:clientId" element={<AddClientForm isEditMode={true} />} />
-
+                        <Route path='/client/quotations' element={<ClientQuotation />} />
+                        <Route path='/client/orders' element={<ClientOrders />} />
+                        <Route path='/client/workorder' element={<ClientWorkorders />} />
 
                         {/* For projects and order */}
 
@@ -102,7 +109,7 @@ const Dashboard = () => {
                         <Route path='workorder/add-new' element={<WorkOrderForm />} />
                         <Route
                             path="/WorkOrder/:id"
-                            element={<WorkOrderProfile/>}
+                            element={<WorkOrderProfile />}
                         />
 
                         <Route path='/projects' element={<Workordergeneratedproject />} />
@@ -132,8 +139,15 @@ const Dashboard = () => {
                         <Route path="/HR/terminationletter" element={<TerminationLetter />} />
                         <Route path="/HR/leavereport" element={<LeaveReport />} />
                         <Route path="/HR/salaryreport" element={<SalaryReport />} />
+
+
+
+                        {/* Back details here */}
+
                         <Route path="/accounts/bank" element={<AccountManager />} />
-                        {/* <Route path="/accounts/receipt" element={<ReceiptManager />} /> */}
+                        <Route path='/accounts/bankdetails' element={<BankDetails />} />
+                        <Route path="/accounts/receipt" element={<ReceiptManager/>} />
+                        <Route path='/accounts/new-receipt' element={<AddReceipt/>}/>
                         <Route path="/accounts/comission" element={<CommisionManger />} />
                         <Route path="/accounts/income-expenes" element={<Incaome_ExpenseManager />} />
                         <Route path="/crm" element={<Crm />} />
