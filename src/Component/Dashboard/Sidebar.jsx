@@ -58,19 +58,19 @@ const mainNavigation = [
         icon: <GrUserManager size={20} />,
         subItems: [
             { label: 'Verify Employee', icon: <MdVerified />, to: '/HR/verifyemplyee' },
-            { label: 'Leave', icon: <MdOutlineDirectionsRun />, to: '/' },
+            { label: 'Leave', icon: <MdOutlineDirectionsRun />, to: '/HR/leave' },
             { label: 'Salary', icon: <RiMoneyRupeeCircleFill />, to: '/HR/salary' },
             // { label: 'Certificate', icon: <TbNotes />, to: '/HR/certificate' },
             // // { label: 'Company WO', icon: <FaShoppingCart />, to: '/HR/companyWO' },
             // { label: 'Performance', icon: <MdOutlineSpeed />, to: '/HR/performance' },
             // { label: 'Interview', icon: <FaUserTie />, to: '/HR/interview' },
             // { label: 'ID Card', icon: <FaRegIdCard />, to: '/HR/idcard' },
-            // {
-            //     label: 'Letter', icon: <MdOutlineMailOutline />, subItems: [
-            //         { label: 'Offer Letter', icon: <TbFileCertificate />, to: '/' },
-            //         { label: 'Termination Letter', icon: <MdOutlineCancel />, to: '/' },
-            //     ]
-            // },
+            {
+                label: 'Letter', icon: <MdOutlineMailOutline />, subItems: [
+                    { label: 'Offer Letter', icon: <TbFileCertificate />, to: '/' },
+                    { label: 'Termination Letter', icon: <MdOutlineCancel />, to: '/' },
+                ]
+            },
             // {
             //     label: 'Report', icon: <MdReport />, subItems: [
             //         { label: 'Leave Report', icon: <MdOutlineDirectionsRun />, to: '/' },

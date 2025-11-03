@@ -1,14 +1,34 @@
+import { useState, useRef, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { FaUserTie, FaBuilding, FaMapMarkerAlt, FaPencilAlt, FaRegCreditCard } from "react-icons/fa";
+import {
+    FaUserTie, FaBuilding, FaMapMarkerAlt, FaPencilAlt, FaRegCreditCard,
+    FaFileInvoice, FaBoxOpen, FaBriefcase, FaMoneyBillWave
+} from "react-icons/fa";
 import { IoMdArrowRoundBack } from "react-icons/io";
-import { MdEmail, MdPhone } from "react-icons/md";
-import { selectClientById } from '../../../redux/slices/clientSlice'; // Now this will work!
+import { MdEmail, MdPhone, MdAdd, MdArrowDropDown } from "react-icons/md";
+import { selectClientById } from '../../../redux/slices/clientSlice';
 
 const ClientProfile = () => {
     const { clientId } = useParams();
     const navigate = useNavigate();
     const clientData = useSelector(state => selectClientById(state, clientId));
+
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+    const dropdownRef = useRef(null);
+
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+                setIsDropdownOpen(false);
+            }
+        };
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, [dropdownRef]);
+
 
     if (!clientData) {
         return (
@@ -25,27 +45,116 @@ const ClientProfile = () => {
         contactPersons = [], address = {}, billing = {}, orders = [], transactions = []
     } = clientData;
 
+    // --- MODIFIED: Added dark mode classes for icons ---
+    const workflowActions = [
+        {
+            title: "Quotations",
+            icon: <FaFileInvoice className="text-gray-400 dark:text-gray-500" />,
+            listRoute: `/clients/${id}/quotations`,
+            addRoute: `/quotations/add?clientId=${id}`
+        },
+        {
+            title: "Orders",
+            icon: <FaBoxOpen className="text-gray-400 dark:text-gray-500" />,
+            listRoute: `/clients/${id}/orders`,
+            addRoute: `/order/add-order?clientId=${id}`
+        },
+        {
+            title: "Work Orders",
+            icon: <FaBriefcase className="text-gray-400 dark:text-gray-500" />,
+            listRoute: `/clients/${id}/work-orders`,
+            addRoute: `/workorder/add-new?clientId=${id}`
+        },
+        {
+            title: "Invoices",
+            icon: <FaFileInvoice className="text-gray-400 dark:text-gray-500" />,
+            listRoute: `/clients/${id}/invoices`,
+            addRoute: `/invoices/add?clientId=${id}`
+        },
+        {
+            title: "Payments",
+            icon: <FaMoneyBillWave className="text-gray-400 dark:text-gray-500" />,
+            listRoute: `/clients/${id}/payments`,
+            addRoute: `/payments/add?clientId=${id}`
+        },
+    ];
+
+    const handleDropdownNavigate = (route) => {
+        navigate(route);
+        setIsDropdownOpen(false);
+    };
+
     return (
         <div className="bg-brandBackground rounded-xl w-full p-4">
-            {/* Header Section */}
+            {/* --- Header Section --- */}
             <div className="relative p-6 bg-brandPrimary text-white rounded-xl shadow-lg flex justify-between items-center">
+                {/* Client Info (No Change) */}
                 <div className="flex items-center gap-5">
-                    <img src={logoUrl} alt={companyName} className="w-20 h-20 rounded-full border-4 border-white/30 object-cover shadow-md"/>
+                    <img src={logoUrl} alt={companyName} className="w-20 h-20 rounded-full border-4 border-white/30 object-cover shadow-md" />
                     <div>
                         <span className={`inline-block px-3 py-1 text-xs font-semibold rounded-full uppercase mb-2 ${status === 'active' ? 'bg-success/80 text-white' : 'bg-secondaryText/80 text-white'}`}>{status || 'N/A'}</span>
                         <h1 className="text-3xl font-bold tracking-tight">{companyName}</h1>
                         <p className="text-white/80 font-mono text-sm">ID: {id}</p>
                     </div>
                 </div>
+
+                {/* Header Buttons */}
                 <div className="flex items-center gap-2">
                     <button onClick={() => navigate('/clients')} className="px-4 py-2 bg-white/20 hover:bg-white/30 rounded-lg text-sm font-medium transition duration-300 flex items-center gap-2"><IoMdArrowRoundBack /> Back</button>
                     <button onClick={() => navigate(`/clients/edit/${id}`)} className="px-4 py-2 bg-white text-brandPrimary hover:bg-gray-100 rounded-lg text-sm font-bold transition duration-300 flex items-center gap-2"><FaPencilAlt /> Edit</button>
+
+                    {/* --- Actions Dropdown --- */}
+                    <div className="relative" ref={dropdownRef}>
+                        <button
+                            onClick={() => setIsDropdownOpen(prev => !prev)}
+                            className="px-4 py-2 bg-white text-brandPrimary hover:bg-gray-100 rounded-lg text-sm font-bold transition duration-300 flex items-center gap-1"
+                        >
+                            Actions <MdArrowDropDown size={20} />
+                        </button>
+
+                        {/* --- MODIFIED: Dropdown Menu with Animation & Dark Mode --- */}
+                        <div
+                            className={`
+                                absolute right-0 mt-2 w-64 bg-white dark:bg-gray-800 
+                                rounded-lg shadow-xl z-50 overflow-hidden 
+                                ring-1 ring-black ring-opacity-5 dark:ring-1 dark:ring-white/10
+                                transition-all duration-100 ease-out transform
+                                ${isDropdownOpen ? 'opacity-100 scale-100' : 'opacity-0 scale-95 pointer-events-none'}
+                            `}
+                        >
+                            <div className="py-1">
+                                <div className="px-4 py-2 text-xs font-semibold text-gray-400 dark:text-gray-500 uppercase">View</div>
+                                {workflowActions.map(action => (
+                                    <DropdownItem
+                                        key={`view-${action.title}`}
+                                        icon={action.icon}
+                                        text={`View ${action.title}`}
+                                        onClick={() => handleDropdownNavigate(action.listRoute)}
+                                    />
+                                ))}
+                            </div>
+                            <div className="border-t border-gray-100 dark:border-gray-700"></div>
+                            <div className="py-1">
+                                <div className="px-4 py-2 text-xs font-semibold text-gray-400 dark:text-gray-500 uppercase">Create New</div>
+                                {workflowActions.map(action => (
+                                    <DropdownItem
+                                        key={`add-${action.title}`}
+                                        icon={<MdAdd className="text-gray-400 dark:text-gray-500" />}
+                                        text={`Add ${action.title}`}
+                                        onClick={() => handleDropdownNavigate(action.addRoute)}
+                                    />
+                                ))}
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            {/* Main Content Grid */}
+            {/* --- Main Content Grid --- */}
             <div className="mt-6 grid grid-cols-1 lg:grid-cols-5 gap-6">
-                {/* Left Column: Details */}
+
+                {/* --- Left Column --- */}
+                {/* FIXED: 'lg-col-span-2' to 'lg:col-span-2' */}
                 <div className="lg:col-span-2 flex flex-col gap-6">
                     <InfoCard title="Client Details" icon={<FaUserTie />}>
                         <DetailItem label="Client Name" value={clientName} />
@@ -72,7 +181,7 @@ const ClientProfile = () => {
                     </InfoCard>
                 </div>
 
-                {/* Right Column: Financials & Activity */}
+                {/* --- Right Column (No Changes) --- */}
                 <div className="lg:col-span-3 flex flex-col gap-6">
                     <InfoCard title="Financial Overview" icon={<FaRegCreditCard />}>
                         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
@@ -98,7 +207,19 @@ const ClientProfile = () => {
     );
 };
 
-// --- Helper Components ---
+{/* --- MODIFIED: DropdownItem Helper with dark mode hover --- */ }
+const DropdownItem = ({ icon, text, onClick }) => (
+    <button
+        onClick={onClick}
+        className="w-full text-left flex items-center gap-3 px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
+    >
+        <span className="w-5">{icon}</span>
+        <span>{text}</span>
+    </button>
+);
+
+
+// --- Helper Components (No Changes) ---
 
 const InfoCard = ({ title, icon, children }) => (
     <div className="bg-white dark:bg-gray-800 p-5 rounded-xl shadow-sm ring-1 ring-gray-900/5">
@@ -151,6 +272,7 @@ const DataTable = ({ data, type }) => {
                     {data.map((item, index) => (
                         <tr key={item.orderId || item.txnId} className="border-t border-gray-200 dark:border-gray-700 hover:bg-brandBackground dark:hover:bg-gray-700/30">
                             <td className="px-4 py-3 font-mono font-medium text-brandPrimary whitespace-nowrap">{item.orderId || item.txnId}</td>
+                            {/* FIXED: 'whitespace-nowGrap' to 'whitespace-nowrap' */}
                             <td className="px-4 py-3 text-secondaryText whitespace-nowrap">{item.date}</td>
                             {type === 'transaction' && (
                                 <td className="px-4 py-3">

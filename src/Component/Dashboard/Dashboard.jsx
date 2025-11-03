@@ -47,6 +47,9 @@ import EmployeeAttendance from '../../Pages/Admin-Dashboard/Employees/EmployeeAt
 import EmployeePayslips from '../../Pages/Admin-Dashboard/Employees/EmployeePayslips';
 import EmployeeLeave from '../../Pages/Admin-Dashboard/Employees/EmployeeLeave';
 import EmployeeProfile from '../../Pages/Admin-Dashboard/Employees/EmployeeProfile';
+import WorkOrderForm from '../../Pages/Admin-Dashboard/projects/workorders/workOrderForm';
+import CreateQuotation from '../quotations/CreateQuotation';
+import WorkOrderProfile from '../../Pages/Admin-Dashboard/projects/workorders/WorkOrderProfile';
 
 
 
@@ -96,8 +99,17 @@ const Dashboard = () => {
                         <Route path="/order/add-order" element={<AddProject />} />
 
                         <Route path="/WorkOrder" element={<WorkOrderList />} />
+                        <Route path='workorder/add-new' element={<WorkOrderForm />} />
+                        <Route
+                            path="/WorkOrder/:id"
+                            element={<WorkOrderProfile/>}
+                        />
+
                         <Route path='/projects' element={<Workordergeneratedproject />} />
                         <Route path="/projects/profile/:projectId" element={<ProjectProfile />} />
+
+
+                        <Route path='/quotations/add' element={<CreateQuotation />} />
 
 
 

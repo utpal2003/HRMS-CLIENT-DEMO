@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import html2pdf from 'html2pdf.js';
 import { useSelector } from 'react-redux';
 import { selectAllProjects } from '../../../../redux/slices/projectSlice';
+import { FaSave, FaFilePdf, FaTimes } from 'react-icons/fa'; // Added icons
 
 const WorkOrderForm = ({ onSave }) => {
   const navigate = useNavigate();
@@ -41,12 +42,26 @@ const WorkOrderForm = ({ onSave }) => {
         projectCategory: selectedProject.projectType,
         developmentCost: selectedProject.developmentCost,
         total: selectedProject.total
+        // Add any other fields you want to auto-populate
       }));
     } else {
-      setFormData(prev => ({ ...prev, projectId: selectedId }));
+      // Reset fields if "Select Project" is chosen
+      setFormData(prev => ({
+        ...prev,
+        projectId: '',
+        clientId: '',
+        clientName: '',
+        quotationId: '',
+        projectName: '',
+        projectCategory: '',
+        developmentCost: '',
+        total: ''
+      }));
     }
   };
 
+  // --- (Logic functions: saveWorkOrderData, handleSubmit, handleSaveAndDownload) ---
+  // --- (No changes to the logic) ---
   const saveWorkOrderData = (dataToSave) => {
     const newId = `WO-${Date.now()}-${Math.floor(Math.random() * 10000)}`;
     const dateCreated = new Date().toISOString().split('T')[0];
@@ -93,25 +108,33 @@ const WorkOrderForm = ({ onSave }) => {
     }
   };
 
+
+  // Helper for input classes
+  const inputClass = "w-full mt-1 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-secondaryText dark:text-gray-100 rounded-md p-2 focus:ring-brandPrimary focus:border-brandPrimary transition-all duration-200";
+
   return (
-    <div className="min-h-screen bg-background dark:bg-gray-900 py-8 px-4 sm:px-6 lg:px-8">
-      <header className="bg-blue-500 text-white py-4 px-4 sm:px-8 mb-8 rounded-lg shadow-md">
-        <h1 className="text-2xl sm:text-2xl font-extrabold text-center">Work Order Management</h1>
+    // --- RE-STYLED: Page Background ---
+    <div className="min-h-screen bg-brandBackground dark:bg-gray-900 py-8 px-4 sm:px-6 lg:px-8">
+
+      {/* --- RE-STYLED: Header --- */}
+      <header className="bg-brandPrimary text-white py-4 px-4 sm:px-8 mb-8 rounded-lg shadow-md">
+        <h1 className="text-2xl sm:text-3xl font-bold text-center">Work Order Management</h1>
       </header>
 
-      <form onSubmit={handleSubmit} className="max-w-4xl mx-auto bg-white dark:bg-gray-800 py-6 px-4 sm:px-6 lg:px-10 rounded-lg shadow-shadow shadow-lg dark:shadow-lg space-y-6 text-sm sm:text-base">
+      {/* --- RE-STYLED: Form Card --- */}
+      <form onSubmit={handleSubmit} className="max-w-4xl mx-auto bg-card dark:bg-gray-800 py-6 px-4 sm:px-6 lg:px-10 rounded-lg shadow-lg dark:shadow-lg space-y-6 text-sm sm:text-base">
         <div className="flex justify-end mb-4">
-          <p className="text-sm font-semibold text-gray-600 dark:text-gray-300">Date: {today}</p>
+          <p className="text-sm font-semibold text-secondaryText dark:text-gray-300">Date: {today}</p>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <label className="block">
-            <strong className="text-gray-700 dark:text-gray-200">PROJECT ID:</strong>
+            <strong className="text-brandText dark:text-orange-100">PROJECT ID:</strong>
             <select
               name="projectId"
               value={formData.projectId}
               onChange={handleProjectSelect}
-              className="w-full mt-1 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 rounded-md p-2"
+              className={inputClass}
               required
             >
               <option value="">Select Project</option>
@@ -125,26 +148,26 @@ const WorkOrderForm = ({ onSave }) => {
 
           {['clientId', 'clientName', 'quotationId', 'projectName', 'projectCategory'].map((key) => (
             <label key={key} className="block">
-              <strong className="text-gray-700 dark:text-gray-200">{key.replace(/([A-Z])/g, ' $1').toUpperCase()}:</strong>
+              <strong className="text-brandText dark:text-orange-100">{key.replace(/([A-Z])/g, ' $1').toUpperCase()}:</strong>
               <input
                 type="text"
                 name={key}
                 value={formData[key]}
                 onChange={handleChange}
-                className="w-full mt-1 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 rounded-md p-2"
+                className={inputClass}
                 required
               />
             </label>
           ))}
 
           <label className="block sm:col-span-2">
-            <strong className="text-gray-700 dark:text-gray-200">PROJECT DETAILS:</strong>
+            <strong className="text-brandText dark:text-orange-100">PROJECT DETAILS:</strong>
             <textarea
               name="projectDetails"
               value={formData.projectDetails}
               onChange={handleChange}
               rows="4"
-              className="w-full mt-1 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 rounded-md p-2"
+              className={inputClass}
               required
             />
           </label>
@@ -153,13 +176,13 @@ const WorkOrderForm = ({ onSave }) => {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {['warranty', 'warrantyDuration', 'freeMaintenance', 'maintenanceDuration', 'developmentCost', 'serverDomain', 'others', 'total', 'startDate', 'endDate'].map((key) => (
             <label key={key} className="block">
-              <strong className="text-gray-700 dark:text-gray-200">{key.replace(/([A-Z])/g, ' $1').toUpperCase()}:</strong>
+              <strong className="text-brandText dark:text-orange-100">{key.replace(/([A-Z])/g, ' $1').toUpperCase()}:</strong>
               <input
                 type={key.includes('Date') ? 'date' : 'text'}
                 name={key}
                 value={formData[key]}
                 onChange={handleChange}
-                className="w-full mt-1 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 rounded-md p-2"
+                className={inputClass}
               />
             </label>
           ))}
@@ -167,48 +190,48 @@ const WorkOrderForm = ({ onSave }) => {
 
         {["paymentTerms", "scopeOfWork", "materialsPurchased", "termsAndConditions"].map((key) => (
           <div key={key}>
-            <h3 className="font-semibold text-gray-700 dark:text-gray-200 mb-2">{key.replace(/([A-Z])/g, ' $1').toUpperCase()}:</h3>
-            <textarea name={key} value={formData[key]} onChange={handleChange} rows="4" className="w-full border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 rounded-md p-2" />
+            <h3 className="font-semibold text-brandText dark:text-orange-100 mb-2">{key.replace(/([A-Z])/g, ' $1').toUpperCase()}:</h3>
+            <textarea name={key} value={formData[key]} onChange={handleChange} rows="4" className={inputClass} />
           </div>
         ))}
 
+        {/* --- RE-STYLED: Buttons --- */}
         <div className="flex flex-wrap gap-4 justify-end">
           <button
             type="button"
             onClick={() => navigate(-1)}
-            className="px-6 py-2 bg-red-200 text-red-700 border-2 border-red-500 
-             rounded-full shadow-md 
-             hover:bg-red-600 hover:text-white hover:shadow-lg 
-             transition duration-200"
+            className="flex items-center gap-2 px-6 py-2 bg-surfaceNeutral text-secondaryText font-bold 
+                                   border border-gray-300 rounded-lg shadow-sm 
+                                   hover:bg-gray-200 dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-gray-600
+                                   transition duration-200"
           >
-            Cancel
+            <FaTimes /> Cancel
           </button>
 
           <button
             type="submit"
-            className="bg-blue-200 text-blue-700 border-2 border-blue-500 
-             px-6 py-2 rounded-full shadow-md 
-             hover:bg-blue-600 hover:text-white hover:shadow-lg 
-             transition duration-200"
+            className="flex items-center gap-2 px-6 py-2 bg-brandPrimary text-white font-bold 
+                                   rounded-lg shadow-md 
+                                   hover:bg-brandHover 
+                                   transition duration-200"
           >
-            Save Work Order
+            <FaSave /> Save Work Order
           </button>
-
 
           <button
             type="button"
             onClick={handleSaveAndDownload}
-            className="bg-green-200 text-green-700 border-2 border-green-500 
-             px-6 py-2 rounded-full shadow-md 
-             hover:bg-green-600 hover:text-white hover:shadow-lg 
-             transition duration-200"
+            className="flex items-center gap-2 px-6 py-2 bg-success text-white font-bold 
+                                   rounded-lg shadow-md 
+                                   hover:bg-green-700
+                                   transition duration-200"
           >
-            Save & Download PDF
+            <FaFilePdf /> Save & Download
           </button>
-
         </div>
       </form>
 
+      {/* --- PDF Content: Left unchanged as it's for file generation --- */}
       <div ref={pdfContentRef} className="hidden pdf-a4 bg-white px-10 py-8 text-sm" style={{ width: '794px', minHeight: '1123px', margin: '0 auto' }}>
         <img src="/WorkOrder_Header.png" alt="Header" className="w-full mb-4" />
         <div className="text-right font-semibold text-gray-700 mb-4">Date: {today}</div>

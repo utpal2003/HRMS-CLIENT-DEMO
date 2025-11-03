@@ -85,11 +85,11 @@ const initialState = {
     dueDate: '2023-12-15',
     priority: 'Low',
   },],
-  selectedWorkOrder: null, 
+  selectedWorkOrder: null,
 };
 
 const workOrderSlice = createSlice({
-  name: 'workOrders',
+  name: 'workOrders', // This name is used in the store
   initialState,
   reducers: {
     setWorkOrders: (state, action) => {
@@ -116,8 +116,24 @@ const workOrderSlice = createSlice({
   }
 });
 
+// --- EXPORT ACTIONS ---
+// Export all your reducer actions
 export const {
-    selectedWorkOrder,addWorkOrder,updateWorkOrder
-}=workOrderSlice.actions;
+  setWorkOrders,
+  addWorkOrder,
+  updateWorkOrder,
+  deleteWorkOrder,
+  setSelectedWorkOrder,
+  clearSelectedWorkOrder
+} = workOrderSlice.actions;
+
+// --- EXPORT SELECTORS ---
+// Selector to get the entire list of work orders
+export const selectAllWorkOrders = (state) => state.workOrders.workOrders;
+
+// Selector to get a single work order by its ID
+export const selectWorkOrderById = (state, orderId) =>
+  state.workOrders.workOrders.find(order => order.id === orderId);
+
 
 export default workOrderSlice.reducer;

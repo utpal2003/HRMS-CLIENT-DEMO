@@ -43,7 +43,6 @@ const ClientListUI = () => {
         <div className="flex flex-col sm:flex-row justify-between items-center gap-4 mb-6 ">
           <div>
             <h1 className="text-3xl font-bold text-brandText dark:text-white">Clients</h1>
-            <p className="text-secondaryText dark:text-gray-400 mt-1">A list of all clients in your account.</p>
           </div>
           <div className="flex items-center gap-4 w-full sm:w-auto">
             {/* Search Input */}
