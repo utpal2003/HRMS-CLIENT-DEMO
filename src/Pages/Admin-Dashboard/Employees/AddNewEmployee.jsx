@@ -2,10 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { FaTimes } from "react-icons/fa";
 import { toast } from "react-toastify";
 
-// This is now a UI-focused component.
-// It receives initialData and an onCancel function as props.
-
-const AddNewEmployeeForm = ({ initialData, onCancel }) => {
+/**
+ * A modal form component to add a new employee.
+ * This component is now only for creating new employees.
+ *
+ * @param {object} props
+ * @param {function} props.onCancel - The function to call when the modal is closed or cancelled.
+ */
+const AddNewEmployeeForm = ({ onCancel }) => {
   const [empId, setEmpId] = useState("");
   const [formData, setFormData] = useState({
     formalSituation: "Mr.",
@@ -13,33 +17,18 @@ const AddNewEmployeeForm = ({ initialData, onCancel }) => {
     lastName: "",
     employeeType: "",
     email: "",
-    countryCode: "+1",
+    countryCode: "+91", // Set to +91 as a common default
     phone: "",
     password: "",
     confirmPassword: "",
   });
 
+  // This effect runs only once on mount to generate a new, random employee ID.
   useEffect(() => {
-    if (initialData) {
-      // Populate form for editing
-      setEmpId(initialData.employeeId || "N/A");
-      setFormData({
-        formalSituation: initialData.formalSituation || "Mr.",
-        firstName: initialData.firstName || "",
-        lastName: initialData.lastName || "",
-        employeeType: initialData.employeeType || "",
-        email: initialData.email || "",
-        countryCode: initialData.countryCode || "+1",
-        phone: initialData.phone || "",
-        password: "",
-        confirmPassword: "",
-      });
-    } else {
-      // Generate a dummy ID for a new employee
-      const randomId = `EMP${Math.floor(1000 + Math.random() * 9000)}`;
-      setEmpId(randomId);
-    }
-  }, [initialData]);
+    // Generate a dummy ID for a new employee
+    const randomId = `EMP${Math.floor(1000 + Math.random() * 9000)}`;
+    setEmpId(randomId);
+  }, []); // Empty dependency array ensures this runs only once
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -48,12 +37,15 @@ const AddNewEmployeeForm = ({ initialData, onCancel }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!initialData && formData.password !== formData.confirmPassword) {
+    
+    // Password check is now always active
+    if (formData.password !== formData.confirmPassword) {
       toast.error("Passwords do not match!");
       return;
     }
 
-    toast.success(`Employee ${initialData ? 'updated' : 'added'} successfully!`);
+    // Static success message for adding an employee
+    toast.success("Employee added successfully!");
     console.log("Form Submitted:", { ...formData, employeeId: empId });
     onCancel(); // Close the modal
   };
@@ -65,8 +57,9 @@ const AddNewEmployeeForm = ({ initialData, onCancel }) => {
       <div className="p-6 sm:p-8">
         <div className="flex justify-between items-start mb-6">
           <div>
+            {/* Title is now static */}
             <h2 className="text-2xl font-bold text-brandText">
-              {initialData ? "Edit Employee" : "Add New Employee"}
+              Add New Employee
             </h2>
             <p className="text-sm text-secondaryText">Please fill in the details below.</p>
           </div>
@@ -131,9 +124,9 @@ const AddNewEmployeeForm = ({ initialData, onCancel }) => {
             <div>
               <label className="block text-sm font-medium mb-1 text-brandText">Country Code</label>
               <select name="countryCode" value={formData.countryCode} onChange={handleChange} className={inputClasses} required>
+                <option value="+91">+91 (India)</option>
                 <option value="+1">+1 (USA)</option>
                 <option value="+44">+44 (UK)</option>
-                <option value="+91">+91 (India)</option>
                 <option value="+61">+61 (Australia)</option>
                 <option value="+81">+81 (Japan)</option>
               </select>
@@ -144,25 +137,24 @@ const AddNewEmployeeForm = ({ initialData, onCancel }) => {
             </div>
           </div>
 
-          {/* Password fields for new employee */}
-          {!initialData && (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-              <div>
-                <label className="block text-sm font-medium mb-1 text-brandText">Password</label>
-                <input type="password" name="password" value={formData.password} onChange={handleChange} className={inputClasses} placeholder="Enter password" required />
-              </div>
-              <div>
-                <label className="block text-sm font-medium mb-1 text-brandText">Confirm Password</label>
-                <input type="password" name="confirmPassword" value={formData.confirmPassword} onChange={handleChange} className={inputClasses} placeholder="Confirm password" required />
-              </div>
+          {/* Password fields are now always visible */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+            <div>
+              <label className="block text-sm font-medium mb-1 text-brandText">Password</label>
+              <input type="password" name="password" value={formData.password} onChange={handleChange} className={inputClasses} placeholder="Enter password" required />
             </div>
-          )}
+            <div>
+              <label className="block text-sm font-medium mb-1 text-brandText">Confirm Password</label>
+              <input type="password" name="confirmPassword" value={formData.confirmPassword} onChange={handleChange} className={inputClasses} placeholder="Confirm password" required />
+            </div>
+          </div>
 
           {/* Buttons */}
           <div className="flex justify-end gap-4 pt-4 border-t border-surfaceNeutral">
             <button type="button" onClick={onCancel} className="px-6 py-2.5 rounded-lg text-secondaryText bg-surfaceNeutral hover:bg-surfaceNeutral font-semibold transition-colors">Cancel</button>
+            {/* Button text is now static */}
             <button type="submit" className="px-6 py-2.5 rounded-lg text-white bg-brandPrimary hover:bg-brandHover font-semibold transition-colors shadow-sm hover:shadow-md">
-              {initialData ? "Update Employee" : "Save Employee"}
+              Save Employee
             </button>
           </div>
         </form>

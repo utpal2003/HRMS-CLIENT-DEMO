@@ -66,12 +66,12 @@ const mainNavigation = [
             // { label: 'Performance', icon: <MdOutlineSpeed />, to: '/HR/performance' },
             // { label: 'Interview', icon: <FaUserTie />, to: '/HR/interview' },
             // { label: 'ID Card', icon: <FaRegIdCard />, to: '/HR/idcard' },
-            // {
-            //     label: 'Letter', icon: <MdOutlineMailOutline />, subItems: [
-            //         { label: 'Offer Letter', icon: <TbFileCertificate />, to: '/HR/offer-letter' }, // Example path
-            //         { label: 'Termination Letter', icon: <MdOutlineCancel />, to: '/HR/termination-letter' }, // Example path
-            //     ]
-            // },
+            {
+                label: 'Letter', icon: <MdOutlineMailOutline />, subItems: [
+                    { label: 'Offer Letter', icon: <TbFileCertificate />, to: '/HR/offer-letter' }, // Example path
+                    { label: 'Termination Letter', icon: <MdOutlineCancel />, to: '/HR/termination-letter' }, // Example path
+                ]
+            },
             {
                 label: 'Report', icon: <MdReport />, subItems: [
                     // { label: 'Leave Report', icon: <MdOutlineDirectionsRun />, to: '/HR/leave-report' },

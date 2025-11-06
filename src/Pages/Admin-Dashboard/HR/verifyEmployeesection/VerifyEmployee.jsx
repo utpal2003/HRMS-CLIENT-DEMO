@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import { FaIdBadge, FaEnvelope, FaPhoneAlt, FaSpinner, FaBan } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
+import { FaIdBadge, FaEnvelope, FaPhoneAlt, FaSpinner, FaBan, FaUserPlus } from 'react-icons/fa';
+import AddNewEmployeeForm from '../../Employees/AddNewEmployee';
 
 // --- DUMMY DATA ---
 // In a real app, this would come from an API.
@@ -226,55 +228,6 @@ const initialEmployees = [
     }
 ];
 
-
-const EmployeeProfile = ({ employeeData, handleBackToEmployeeList }) => {
-  if (!employeeData) return null;
-
-  const DetailSection = ({ title, data }) => (
-    <div className="mt-6">
-      <h3 className="text-lg font-semibold text-[#7C2D12] border-b-2 border-[#F97316]/30 pb-2 mb-4">
-        {title}
-      </h3>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4">
-        {Object.entries(data).map(([key, value]) => (
-          <div key={key} className="text-sm break-words">
-            <span className="font-medium text-[#7C2D12]/70 capitalize">
-              {key.replace(/([A-Z])/g, " $1")}:{" "}
-            </span>
-            <span className="text-[#7C2D12]">{value || "N/A"}</span>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-
-  return (
-    <div className="bg-white dark:bg-gray-800 shadow-lg rounded-xl p-6 mt-6 border border-[#F97316]/20">
-      <div className="flex justify-between items-center mb-6">
-        <h2 className="text-2xl font-bold text-[#F97316]">Employee Profile</h2>
-        <button
-          onClick={handleBackToEmployeeList}
-          className="px-4 py-2 bg-[#FFEDD5] text-[#7C2D12] font-semibold rounded-full hover:bg-[#F97316] hover:text-white transition duration-300 shadow-sm border border-[#F97316]/40"
-        >
-          ← Back to List
-        </button>
-      </div>
-
-      <DetailSection
-        title="Personal Information"
-        data={{
-          Name: `${employeeData.firstName} ${employeeData.lastName}`,
-          Email: employeeData.email,
-          Phone: employeeData.phone,
-          DOB: employeeData.dateOfBirth,
-        }}
-      />
-      <DetailSection title="Company Information" data={employeeData.companyInfo} />
-    </div>
-  );
-};
-
-// --- STATUS BADGE ---
 const StatusBadge = ({ status }) => {
   const statusStyles = {
     Pending: "bg-[#FEF3C7] text-[#92400E] border-[#FCD34D]",
@@ -284,6 +237,8 @@ const StatusBadge = ({ status }) => {
     Pending: <FaSpinner className="animate-spin text-sm" />,
     Rejected: <FaBan className="text-sm" />,
   };
+
+  if (!statusStyles[status]) return null;
 
   return (
     <span
@@ -295,7 +250,7 @@ const StatusBadge = ({ status }) => {
   );
 };
 
-// --- EMPLOYEE CARD ---
+// --- EMPLOYEE CARD (Helper Component) ---
 const EmployeeCard = ({ employee, onClick }) => (
   <li
     className="bg-white dark:bg-gray-800 border border-[#F97316]/20 rounded-xl shadow-md hover:shadow-lg hover:-translate-y-1 transition-all duration-300 cursor-pointer flex flex-col"
@@ -311,7 +266,6 @@ const EmployeeCard = ({ employee, onClick }) => (
         {employee.firstName} {employee.lastName}
       </h3>
     </div>
-
     <div className="p-5 flex flex-col justify-between flex-grow">
       <div>
         <p className="flex items-center mb-2 text-[#7C2D12]">
@@ -327,11 +281,9 @@ const EmployeeCard = ({ employee, onClick }) => (
           <strong>Phone:</strong>&nbsp;{employee.phone}
         </p>
       </div>
-
       <div className="flex items-center justify-center pt-4 border-t border-dashed border-[#F97316]/30 font-bold text-lg">
         <strong>Status:</strong> <StatusBadge status={employee.verifyStatus} />
       </div>
-
       {employee.verifyStatus === "Rejected" && employee.rejectReason && (
         <p className="text-[#EF4444] text-sm italic mt-2 text-center break-words">
           Reason: {employee.rejectReason}
@@ -341,117 +293,58 @@ const EmployeeCard = ({ employee, onClick }) => (
   </li>
 );
 
-// --- MAIN VERIFY EMPLOYEE COMPONENT ---
+// --- MAIN VERIFY EMPLOYEE (LIST) COMPONENT ---
 const VerifyEmployee = () => {
   const [employees, setEmployees] = useState(initialEmployees);
-  const [selectedEmployee, setSelectedEmployee] = useState(null);
-  const [statusForEdit, setStatusForEdit] = useState("");
-  const [rejectReason, setRejectReason] = useState("");
+  const [showAddForm, setShowAddForm] = useState(false); // ✅ Popup control
+  const navigate = useNavigate();
 
-  const handleSelectEmployee = (employee) => {
-    setSelectedEmployee(employee);
-    setStatusForEdit(employee.verifyStatus);
-    setRejectReason(employee.rejectReason || "");
+  //  Handle Add Employee Popup
+  const handleAddEmployee = () => {
+    setShowAddForm(true);
   };
 
-  const handleBackToList = () => {
-    setSelectedEmployee(null);
+  //  Handle Closing Popup
+  const handleCloseForm = () => {
+    setShowAddForm(false);
   };
 
-  const handleUpdateStatus = () => {
-    setEmployees((prevEmployees) =>
-      prevEmployees.map((emp) =>
-        emp.id === selectedEmployee.id
-          ? {
-              ...emp,
-              verifyStatus: statusForEdit,
-              rejectReason:
-                statusForEdit === "Rejected" ? rejectReason : "",
-            }
-          : emp
-      )
-    );
-    handleBackToList();
+  //  When a new employee is added successfully
+  // const handleEmployeeAdded = (newEmployee) => {
+  //   setEmployees([...employees, newEmployee]);
+  //   setShowAddForm(false);
+  // };
+
+  //  Navigate to verification detail page
+  const handleSelectEmployee = (id) => {
+    navigate(`/HR/verify-employee/${id}`);
   };
 
-  if (selectedEmployee) {
-    return (
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-5">
-        <div className="bg-white dark:bg-gray-800 shadow-lg rounded-xl p-6 border border-[#F97316]/20">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-end">
-            <div>
-              <label
-                htmlFor="status-select"
-                className="block text-sm font-medium text-[#7C2D12] mb-1"
-              >
-                Change Status
-              </label>
-              <select
-                id="status-select"
-                className="block w-full px-4 py-2 border border-[#F97316]/30 rounded-full bg-[#FFF7ED] text-[#7C2D12] shadow-sm focus:outline-none focus:ring-2 focus:ring-[#F97316]"
-                value={statusForEdit}
-                onChange={(e) => setStatusForEdit(e.target.value)}
-              >
-                <option value="Pending">🕒 Pending</option>
-                <option value="Verified">✅ Verified</option>
-                <option value="Rejected">⛔ Rejected</option>
-              </select>
-            </div>
-
-            <div className="flex justify-end md:justify-start gap-3">
-              <button
-                onClick={handleBackToList}
-                className="px-6 py-2 bg-[#FFEDD5] text-[#7C2D12] border-2 border-[#F97316]/30 font-semibold rounded-full shadow-sm hover:bg-[#F97316] hover:text-white transition duration-300"
-              >
-                Cancel
-              </button>
-              <button
-                onClick={handleUpdateStatus}
-                className="px-6 py-2 bg-[#F97316] text-white border-2 border-[#EA580C] font-semibold rounded-full shadow-md hover:bg-[#EA580C] transition duration-300"
-              >
-                Update Status
-              </button>
-            </div>
-          </div>
-
-          {statusForEdit === "Rejected" && (
-            <div className="mt-6">
-              <label
-                htmlFor="rejection-reason"
-                className="block text-sm font-medium text-[#7C2D12] mb-1"
-              >
-                Rejection Reason
-              </label>
-              <input
-                id="rejection-reason"
-                type="text"
-                placeholder="Enter reason for rejection"
-                value={rejectReason}
-                onChange={(e) => setRejectReason(e.target.value)}
-                className="w-full px-4 py-2 border border-[#F97316]/30 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-[#F97316] bg-[#FFF7ED] text-[#7C2D12]"
-              />
-            </div>
-          )}
-        </div>
-
-        <EmployeeProfile
-          employeeData={selectedEmployee}
-          handleBackToEmployeeList={handleBackToList}
-        />
-      </div>
-    );
-  }
-
+  // 🔹 Filter employees for verification
   const employeesToDisplay = employees.filter(
     (emp) => emp.verifyStatus === "Pending" || emp.verifyStatus === "Rejected"
   );
 
   return (
     <div className="p-6 bg-[#FFF7ED] dark:bg-gray-900 rounded-xl min-h-screen">
-      <h2 className="text-3xl font-bold text-center text-[#F97316] mb-8">
-        Verification Queue
-      </h2>
+      {/* Header */}
+      <div className="flex flex-col sm:flex-row justify-between items-center mb-8 gap-4">
+        <h2 className="text-3xl font-bold text-[#F97316]">
+          Verification Queue
+        </h2>
+        <button
+          onClick={handleAddEmployee}
+          className="flex items-center justify-center gap-2 w-full sm:w-auto px-5 py-2.5 
+                     bg-[#F97316] text-white font-bold rounded-lg shadow-md
+                     hover:bg-[#EA580C] transition-all duration-300
+                     focus:outline-none focus:ring-2 focus:ring-[#F97316] focus:ring-offset-2"
+        >
+          <FaUserPlus size={18} />
+          Add Employee
+        </button>
+      </div>
 
+      {/* Employee List */}
       {employeesToDisplay.length === 0 ? (
         <p className="text-center text-[#7C2D12]/80 text-lg p-5 bg-[#FFEDD5] rounded-lg shadow-sm">
           No pending or rejected employees. Great work! 👍
@@ -462,10 +355,21 @@ const VerifyEmployee = () => {
             <EmployeeCard
               key={employee.id}
               employee={employee}
-              onClick={() => handleSelectEmployee(employee)}
+              onClick={() => handleSelectEmployee(employee.id)}
             />
           ))}
         </ul>
+      )}
+
+      {/* ✅ Add Employee Popup Modal */}
+      {showAddForm && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50">
+            {/* Import your form here */}
+            <AddNewEmployeeForm
+              // onAdd={handleEmployeeAdded}
+              onCancel={handleCloseForm}
+            />
+          </div>
       )}
     </div>
   );

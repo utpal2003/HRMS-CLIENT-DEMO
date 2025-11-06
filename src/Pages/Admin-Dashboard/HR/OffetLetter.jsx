@@ -40,7 +40,8 @@ const OffetLetter = ({ dashboardName }) => {
             .then((res) => res.json())
             .then((data) =>
                 setFormData((prev) => ({ ...prev, stampUrl: data.stamp }))
-            );
+            )
+            .catch(err => console.error("Failed to fetch stamp:", err)); // Added error handling
     }, []);
 
     const handleGeneratePDF = () => {
@@ -60,7 +61,8 @@ const OffetLetter = ({ dashboardName }) => {
     };
 
     const handleGenerate = () => {
-        toast.success("Generate Successfully");
+        // Here you would typically save the formData to your database
+        toast.success("Offer Letter Generated Successfully!");
     };
 
     const fields = [
@@ -99,13 +101,13 @@ const OffetLetter = ({ dashboardName }) => {
     ];
 
     return (
-        <div className="min-h-screen bg-background dark:bg-gray-900 p-4 rounded-3xl w-full">
+        <div className="min-h-screen bg-brandBackground p-4 w-full">
             {/* Header */}
-            <div className="relative p-6 bg-gradient-to-br from-blue-400 to-indigo-800 dark:from-blue-700 dark:to-indigo-900 text-white flex flex-col gap-4 sm:flex-row sm:justify-between sm:items-center rounded-t-3xl">
+            <div className="relative p-6 bg-gradient-to-br from-brandPrimary to-brandHover text-white flex flex-col gap-4 sm:flex-row sm:justify-between sm:items-center rounded-t-3xl">
 
                 {/* Left buttons */}
                 <div className="flex items-center gap-3">
-                    <Link to={`/${dashboardName}`}>
+                    <Link to={`/`}>
                         <button className="px-5 py-2 bg-white bg-opacity-20 hover:bg-opacity-30 rounded-full text-base font-medium transition duration-300 ease-in-out flex items-center gap-2">
                             <IoMdArrowRoundBack className="text-xl" />
                             Back to HR
@@ -127,15 +129,15 @@ const OffetLetter = ({ dashboardName }) => {
             {/* FORM SECTION */}
             {!showPreview && (
                 <>
-                    <div className="bg-white dark:bg-gray-800 p-4 rounded-b-3xl shadow-lg shadow-shadow dark:shadow-lg mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <div className="bg-white p-4 rounded-b-3xl shadow-lg mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                         {fields.map((field, idx) => (
                             <div key={idx} className="flex flex-col">
-                                <label className="text-gray-700 dark:text-white font-semibold mb-1">
+                                <label className="text-secondaryText font-semibold mb-1">
                                     {field.label}:
                                 </label>
                                 {field.type === "select" ? (
                                     <select
-                                        className="p-2 border border-gray-300 rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                                        className="p-2 border border-gray-300 rounded-md bg-surfaceNeutral text-secondaryText focus:outline-none focus:ring-2 focus:ring-brandPrimary"
                                         value={formData[field.key]}
                                         onChange={(e) => handleChange(field.key, e.target.value)}
                                     >
@@ -151,7 +153,7 @@ const OffetLetter = ({ dashboardName }) => {
                                         type={field.type || "text"}
                                         value={formData[field.key]}
                                         onChange={(e) => handleChange(field.key, e.target.value)}
-                                        className="p-2 border border-gray-300 rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                                        className="p-2 border border-gray-300 rounded-md bg-surfaceNeutral text-secondaryText focus:outline-none focus:ring-2 focus:ring-brandPrimary"
                                         placeholder={field.label}
                                     />
                                 )}
@@ -163,10 +165,10 @@ const OffetLetter = ({ dashboardName }) => {
                     <div className="flex justify-center mt-6">
                         <button
                             onClick={() => setShowPreview(true)}
-                            className="bg-blue-200 text-blue-700 border-2 border-blue-500 
-             px-6 py-2 rounded-full shadow-md 
-             hover:bg-blue-600 hover:text-white hover:shadow-lg 
-             transition duration-200"
+                            className="bg-brandLight text-brandText border-2 border-brandPrimary 
+                             px-6 py-2 rounded-full shadow-md 
+                             hover:bg-brandPrimary hover:text-white hover:shadow-lg 
+                             transition duration-200"
                         >
                             Preview
                         </button>
@@ -176,12 +178,12 @@ const OffetLetter = ({ dashboardName }) => {
 
             {/* PREVIEW SECTION */}
             {showPreview && (
-                <div className="bg-background p-4 mt-6">
-                    <h1 className="font-bold p-4 text-2xl text-blue-500">Generated PDF</h1>
+                <div className="bg-brandBackground p-4 mt-6">
+                    <h1 className="font-bold p-4 text-2xl text-brandText">Generated PDF</h1>
                     <div className="flex justify-center overflow-auto mt-4">
                         <div
                             ref={pdfRef}
-                            className="bg-white relative shadow-2xl shadow-shadow dark:shadow-2xl"
+                            className="bg-white relative shadow-2xl shadow-brandPrimary/20"
                             style={{
                                 display: "flex",
                                 flexDirection: "column",
@@ -306,30 +308,30 @@ const OffetLetter = ({ dashboardName }) => {
                     <div className="flex justify-center gap-4 mt-6">
                         <button
                             onClick={() => setShowPreview(false)}
-                            className="bg-red-200 text-red-700 border-2 border-red-500 
-             px-6 py-2 rounded-full shadow-md 
-             hover:bg-red-600 hover:text-white hover:shadow-lg 
-             transition duration-200"
+                            className="bg-errorLight text-error border-2 border-error 
+                             px-6 py-2 rounded-full shadow-md 
+                             hover:bg-error hover:text-white hover:shadow-lg 
+                             transition duration-200"
                         >
                             Back
                         </button>
 
                         <button
                             onClick={handleGeneratePDF}
-                            className="bg-indigo-200 text-indigo-700 border-2 border-indigo-500 
-             px-6 py-2 rounded-full shadow-md 
-             hover:bg-indigo-600 hover:text-white hover:shadow-lg 
-             transition duration-200"
+                            className="bg-brandPrimary text-white 
+                             px-6 py-2 rounded-full shadow-md 
+                             hover:bg-brandHover hover:shadow-lg 
+                             transition duration-200"
                         >
                             Download
                         </button>
 
                         <button
                             onClick={handleGenerate}
-                            className="bg-green-200 text-green-700 border-2 border-green-500 
-             px-6 py-2 rounded-full shadow-md 
-             hover:bg-green-600 hover:text-white hover:shadow-lg 
-             transition duration-200"
+                            className="bg-successLight text-success border-2 border-success
+                             px-6 py-2 rounded-full shadow-md 
+                             hover:bg-success hover:text-white hover:shadow-lg 
+                             transition duration-200"
                         >
                             Generate
                         </button>

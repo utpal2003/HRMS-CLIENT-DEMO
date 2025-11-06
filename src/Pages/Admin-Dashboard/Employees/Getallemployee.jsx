@@ -56,28 +56,18 @@ const Getallemployee = () => {
 
     const [employees, setEmployees] = useState(dummyEmployees);
     const [showAddEmployeeModal, setShowAddEmployeeModal] = useState(false);
-    const [selectedEmployee, setSelectedEmployee] = useState(null);
+    // --- REMOVED selectedEmployee state ---
     const [searchQuery, setSearchQuery] = useState('');
 
     // --- REMOVED All state-based navigation state ---
-    // const [currentView, setCurrentView] = useState('list');
-    // const [leaveData, setLeaveData] = useState([]);
-    // ... etc.
 
-
-    // --- UPDATED HANDLER ---
+    // --- This handler is now used by the card click AND the edit icon ---
     const handleViewEmployeeDetails = (employeeId) => {
         // This now navigates to the route you defined
         navigate(`/Employee/employeeprofile/${employeeId}`);
     };
 
-    const handleEditEmployee = (employeeId) => {
-        const employeeToEdit = employees.find(emp => emp._id === employeeId);
-        if (employeeToEdit) {
-            setSelectedEmployee(employeeToEdit);
-            setShowAddEmployeeModal(true);
-        }
-    };
+    // --- REMOVED handleEditEmployee function ---
 
     const handleRestrictLogin = (e, employeeId) => {
         e.stopPropagation();
@@ -85,7 +75,6 @@ const Getallemployee = () => {
     };
 
     // --- REMOVED all state-based navigation handlers ---
-    // (handleBackToEmployeeList, handleShowAttendance, etc.)
 
     // --- SEARCH FILTER (Unchanged) ---
     const filteredEmployees = employees.filter(emp => `${emp.firstName} ${emp.lastName} ${emp.employeeId}`.toLowerCase().includes(searchQuery.toLowerCase()));
@@ -113,7 +102,8 @@ const Getallemployee = () => {
                             />
                         </div>
                         <button
-                            onClick={() => { setSelectedEmployee(null); setShowAddEmployeeModal(true); }}
+                            // --- UPDATED onClick: Removed setSelectedEmployee ---
+                            onClick={() => { setShowAddEmployeeModal(true); }}
                             className="w-full sm:w-auto bg-brandPrimary text-white font-semibold rounded-lg text-sm px-5 py-2.5 shadow-md hover:bg-brandHover transition-all duration-300 ease-in-out flex justify-center items-center gap-2"
                         >
                             <FaUserPlus />
@@ -141,7 +131,13 @@ const Getallemployee = () => {
                                     <p className="text-xs text-brandText mt-2 bg-brandLight rounded-full px-3 py-1 font-semibold tracking-wide">ID: {employee.employeeId}</p>
                                 </div>
                                 <div className="flex justify-center items-center gap-8 py-3 bg-gradient-to-r from-brandLight to-orange-200 border-t border-orange-200">
-                                    <button onClick={(e) => { e.stopPropagation(); handleEditEmployee(employee._id) }} data-tooltip-id="tooltip" data-tooltip-content="Edit Employee" className="text-blue-500 hover:text-brandPrimary text-xl transition-all duration-200 hover:scale-110">
+                                    {/* --- UPDATED onClick to redirect to profile --- */}
+                                    <button 
+                                        onClick={(e) => { e.stopPropagation(); handleViewEmployeeDetails(employee._id) }} 
+                                        data-tooltip-id="tooltip" 
+                                        data-tooltip-content="View Profile" // <-- Updated tooltip
+                                        className="text-blue-500 hover:text-brandPrimary text-xl transition-all duration-200 hover:scale-110"
+                                    >
                                         <FaUserEdit />
                                     </button>
                                     {employee.loginRestricted ? (
@@ -165,9 +161,9 @@ const Getallemployee = () => {
             {showAddEmployeeModal && (
                 <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-60 p-4 animate-fadeIn">
                     <AddNewEmployeeForm
-                        initialData={selectedEmployee}
+                        // --- UPDATED: Removed initialData prop ---
                         onCancel={() => setShowAddEmployeeModal(false)}
-                    // You'll need to add an onSave handler here
+                    // You'll need to add an onSave handler here to handle the form submission
                     />
                 </div>
             )}

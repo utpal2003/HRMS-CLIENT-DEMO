@@ -12,7 +12,7 @@ import WorkOrderList from '../../Pages/Admin-Dashboard/projects/workorders/WorkO
 import OffetLetter from '../../Pages/Admin-Dashboard/HR/OffetLetter';
 import TerminationLetter from '../../Pages/Admin-Dashboard/HR/TerminationLetter';
 import Leave from '../../Pages/Admin-Dashboard/HR/Leave/Leave';
-import VerifyEmployee from '../../Pages/Admin-Dashboard/HR/VerifyEmployee';
+import VerifyEmployee from '../../Pages/Admin-Dashboard/HR/verifyEmployeesection/VerifyEmployee';
 import Interview from '../../Pages/Admin-Dashboard/HR/Interview';
 import SalaryReport from '../../Pages/Admin-Dashboard/HR/SalaryReport';
 import Holidays from '../../Pages/Admin-Dashboard/HR/Holidays';
@@ -57,6 +57,7 @@ import BankDetails from '../../Pages/Admin-Dashboard/Accounts/BankDetails';
 import ReceiptManager from '../../Pages/Admin-Dashboard/Accounts/ReceiptManager'
 import AddReceipt from '../../Pages/Admin-Dashboard/Accounts/AddReceipt';
 import DailyAttendance from '../../Pages/Admin-Dashboard/HR/Attendance/DailyAttendance';
+import EmployeeVerificationProfile from '../../Pages/Admin-Dashboard/HR/verifyEmployeesection/EmployeeVerificationProfile';
 
 
 const Dashboard = () => {
@@ -127,6 +128,7 @@ const Dashboard = () => {
                         <Route path="/production" element={<ProductionManager />} />
                         <Route path="/production/delivered" element={<DeliveredProjects />} />
                         <Route path="/HR/verifyemplyee" element={<VerifyEmployee />} />
+                        <Route path="/HR/verify-employee/:id" element={<EmployeeVerificationProfile/>}/>
                         <Route path="/HR/leave" element={<Leave />} />
                         <Route path="/HR/salary" element={<Salary />} />
                         <Route path="HR/daily-attendance" element={<DailyAttendance />} />
@@ -137,8 +139,8 @@ const Dashboard = () => {
                         <Route path="/HR/calendar" element={<Calendar />} />
                         <Route path="/HR/interview" element={<Interview />} />
                         <Route path="/HR/companyWO" element={<HRWO_Manager />} />
-                        <Route path="/HR/offerletter" element={<OffetLetter />} />
-                        <Route path="/HR/terminationletter" element={<TerminationLetter />} />
+                        <Route path="/HR/offer-letter" element={<OffetLetter />} />
+                        <Route path="/HR/termination-letter" element={<TerminationLetter />} />
                         <Route path="/HR/leavereport" element={<LeaveReport />} />
                         <Route path="/HR/salaryreport" element={<SalaryReport />} />
 
