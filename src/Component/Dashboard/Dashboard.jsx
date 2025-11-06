@@ -56,6 +56,7 @@ import ClientWorkorders from '../../Pages/Admin-Dashboard/Clients/ClientWorkorde
 import BankDetails from '../../Pages/Admin-Dashboard/Accounts/BankDetails';
 import ReceiptManager from '../../Pages/Admin-Dashboard/Accounts/ReceiptManager'
 import AddReceipt from '../../Pages/Admin-Dashboard/Accounts/AddReceipt';
+import DailyAttendance from '../../Pages/Admin-Dashboard/HR/Attendance/DailyAttendance';
 
 
 const Dashboard = () => {
@@ -128,6 +129,7 @@ const Dashboard = () => {
                         <Route path="/HR/verifyemplyee" element={<VerifyEmployee />} />
                         <Route path="/HR/leave" element={<Leave />} />
                         <Route path="/HR/salary" element={<Salary />} />
+                        <Route path="HR/daily-attendance" element={<DailyAttendance />} />
                         <Route path="/HR/certificate" element={<Certificate />} />
                         <Route path="/HR/idcard" element={<IdCard />} />
                         <Route path="/HR/performance" element={<Perfomance />} />
@@ -146,8 +148,8 @@ const Dashboard = () => {
 
                         <Route path="/accounts/bank" element={<AccountManager />} />
                         <Route path='/accounts/bankdetails' element={<BankDetails />} />
-                        <Route path="/accounts/receipt" element={<ReceiptManager/>} />
-                        <Route path='/accounts/new-receipt' element={<AddReceipt/>}/>
+                        <Route path="/accounts/receipt" element={<ReceiptManager />} />
+                        <Route path='/accounts/new-receipt' element={<AddReceipt />} />
                         <Route path="/accounts/comission" element={<CommisionManger />} />
                         <Route path="/accounts/income-expenes" element={<Incaome_ExpenseManager />} />
                         <Route path="/crm" element={<Crm />} />

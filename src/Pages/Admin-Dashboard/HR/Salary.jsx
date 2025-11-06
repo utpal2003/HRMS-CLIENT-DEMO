@@ -1,109 +1,95 @@
-import React from "react";
+import React, { useState } from "react";
+import { PlusCircle } from "lucide-react"; // Using lucide-react for icons
+import AddSalaryModal from "../../../Component/AddSalaryModal";
 
-const Salary = () => {
-  const employees = [
-    { id: "EMP001", firstName: "Alice", lastName: "Smith", salary: 20000 },
-    { id: "EMP002", firstName: "Bob", lastName: "Jones", salary: 25000 },
-    { id: "EMP003", firstName: "Charlie", lastName: "Lee", salary: 18000 },
-    { id: "EMP004", firstName: "David", lastName: "Roy", salary: 22000 },
-    { id: "EMP005", firstName: "Eva", lastName: "Patel", salary: 27000 },
-  ];
 
-  const salaryData = employees.map((emp, index) => {
-    const workDays = 24;
-    const leave = 6;
+const initialEmployees = [
+  { id: "EMP001", name: "Alice Smith", salary: 20000, workHours: 160, monthlyLeave: 2 },
+  { id: "EMP002", name: "Bob Jones", salary: 25000, workHours: 160, monthlyLeave: 1 },
+  { id: "EMP003", name: "Charlie Lee", salary: 18000, workHours: 150, monthlyLeave: 3 },
+  { id: "EMP004", name: "David Roy", salary: 22000, workHours: 160, monthlyLeave: 2 },
+  { id: "EMP005", name: "Eva Patel", salary: 27000, workHours: 155, monthlyLeave: 1 },
+];
 
-    const perDay = +(emp.salary / 30).toFixed(2);
-    const perHour = +(perDay / 9).toFixed(2);
-    const otHrs = (index + 1) * 1.5;
-    const pay = +(perHour * otHrs).toFixed(2);
-    const other = 200;
-    const total = +(perDay * workDays + pay + other).toFixed(2);
-    const deduct = 4000;
-    const netPay = +(total - deduct).toFixed(2);
+function SalaryPage() {
+  // --- State Management ---
+  const [employees, setEmployees] = useState(initialEmployees);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-    return {
-      sl: index + 1,
-      empId: emp.id,
-      name: `${emp.firstName} ${emp.lastName}`,
-      salary: emp.salary,
-      perDay,
-      workDays,
-      leave,
-      perHour,
-      otHrs,
-      pay,
-      other,
-      total,
-      deduct,
-      netPay,
-    };
-  });
+
+  const handleSaveSalary = (employeeId, newSalary) => {
+    setEmployees(currentEmployees =>
+      currentEmployees.map(emp =>
+        emp.id === employeeId ? { ...emp, salary: newSalary } : emp
+      )
+    );
+    console.log(`Updated salary for ${employeeId} to ${newSalary}`);
+  };
 
   return (
-    <div className="p-6 bg-gradient-to-br from-orange-50 via-white to-orange-100 min-h-screen">
-      <h1 className="text-2xl font-bold mb-6 text-orange-600 text-center">
-        💼 Salary Report
-      </h1>
+    <div className="p-4 sm:p-8 bg-brandBackground min-h-screen">
+      
+      {/* === Page Header === */}
+      <div className="flex flex-col sm:flex-row justify-between items-center mb-6 gap-4">
+        <h1 className="text-3xl font-bold text-brandText">
+          💼 Employee Salary Overview
+        </h1>
+        <button
+          onClick={() => setIsModalOpen(true)}
+          className="flex items-center justify-center gap-2 w-full sm:w-auto px-5 py-2.5 
+                     bg-brandPrimary text-white font-bold rounded-lg shadow-md
+                     hover:bg-brandHover transition-all duration-300
+                     focus:outline-none focus:ring-2 focus:ring-brandPrimary focus:ring-offset-2"
+        >
+          <PlusCircle size={20} />
+          Add / Edit Salary
+        </button>
+      </div>
 
-      <div className="overflow-x-auto shadow-xl rounded-xl border border-orange-300 bg-white">
-        <table className="min-w-full text-sm text-left border-collapse">
-          <thead className="bg-orange-500 text-white text-xs uppercase">
+      {/* === Simplified Salary Table === */}
+      <div className="overflow-x-auto shadow-lg rounded-xl border border-orange-200 bg-card">
+        <table className="min-w-full text-sm text-left">
+          
+          {/* Table Header */}
+          <thead className="bg-brandLight text-xs uppercase text-brandText tracking-wider">
             <tr>
-              <th className="px-3 py-2 border border-orange-300">SL NO</th>
-              <th className="px-3 py-2 border border-orange-300">EMP ID</th>
-              <th className="px-3 py-2 border border-orange-300">NAME</th>
-              <th className="px-3 py-2 border border-orange-300">SALARY</th>
-              <th className="px-3 py-2 border border-orange-300">PER DAY</th>
-              <th className="px-3 py-2 border border-orange-300">WORK DAYS</th>
-              <th className="px-3 py-2 border border-orange-300">LEAVE</th>
-              <th className="px-3 py-2 border border-orange-300">OT HOURS</th>
-              <th className="px-3 py-2 border border-orange-300">PAY</th>
-              <th className="px-3 py-2 border border-orange-300">OTHER</th>
-              <th className="px-3 py-2 border border-orange-300">TOTAL</th>
-              <th className="px-3 py-2 border border-orange-300">DEDUCT</th>
-              <th className="px-3 py-2 border border-orange-300">NET PAY</th>
+              <th className="px-4 py-3 font-semibold">Employee ID</th>
+              <th className="px-4 py-3 font-semibold">Name</th>
+              <th className="px-4 py-3 font-semibold">Base Salary (Monthly)</th>
+              <th className="px-4 py-3 font-semibold">Work Hours (Monthly)</th>
+              <th className="px-4 py-3 font-semibold">Allowed Leave</th>
             </tr>
           </thead>
 
-          <tbody>
-            {salaryData.map((sal, idx) => (
+          {/* Table Body */}
+          <tbody className="divide-y divide-gray-200">
+            {employees.map((emp, idx) => (
               <tr
-                key={idx}
-                className={`text-center ${
-                  idx % 2 === 0 ? "bg-orange-50" : "bg-white"
-                } hover:bg-orange-100 transition`}
+                key={emp.id}
+                className={idx % 2 === 0 ? "bg-white" : "bg-surfaceNeutral/50"}
               >
-                <td className="border border-orange-200 px-3 py-2">{sal.sl}</td>
-                <td className="border border-orange-200 px-3 py-2">{sal.empId}</td>
-                <td className="border border-orange-200 px-3 py-2">{sal.name}</td>
-                <td className="border border-orange-200 px-3 py-2">₹{sal.salary}</td>
-                <td className="border border-orange-200 px-3 py-2">{sal.perDay}</td>
-                <td className="border border-orange-200 px-3 py-2">{sal.workDays}</td>
-                <td className="border border-orange-200 px-3 py-2">{sal.leave}</td>
-                <td className="border border-orange-200 px-3 py-2">{sal.otHrs}</td>
-                <td className="border border-orange-200 px-3 py-2">₹{sal.pay}</td>
-                <td className="border border-orange-200 px-3 py-2">₹{sal.other}</td>
-                <td className="border border-orange-200 px-3 py-2 font-medium">
-                  ₹{sal.total}
+                <td className="px-4 py-3 font-mono text-secondaryText">{emp.id}</td>
+                <td className="px-4 py-3 font-medium text-text">{emp.name}</td>
+                <td className="px-4 py-3 font-medium text-success">
+                  ₹{emp.salary.toLocaleString('en-IN')}
                 </td>
-                <td className="border border-orange-200 px-3 py-2 text-red-600 font-medium">
-                  ₹{sal.deduct}
-                </td>
-                <td className="border border-orange-200 px-3 py-2 font-bold text-green-700">
-                  ₹{sal.netPay}
-                </td>
+                <td className="px-4 py-3 text-secondaryText">{emp.workHours} hrs</td>
+                <td className="px-4 py-3 text-secondaryText">{emp.monthlyLeave} days</td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
 
-      <p className="mt-6 text-center text-sm text-orange-600 font-medium">
-        © 2025 Payroll Management | All Rights Reserved
-      </p>
+
+      <AddSalaryModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        employees={employees}
+        onSaveSalary={handleSaveSalary}
+      />
     </div>
   );
-};
+}
 
-export default Salary;
+export default SalaryPage;

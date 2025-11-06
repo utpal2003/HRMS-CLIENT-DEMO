@@ -60,6 +60,7 @@ const mainNavigation = [
             { label: 'Verify Employee', icon: <MdVerified />, to: '/HR/verifyemplyee' },
             { label: 'Leave', icon: <MdOutlineDirectionsRun />, to: '/HR/leave' },
             { label: 'Salary', icon: <RiMoneyRupeeCircleFill />, to: '/HR/salary' },
+            { label: 'Attendance', icon: <MdVerified />, to: 'HR/daily-attendance'},
             // { label: 'Certificate', icon: <TbNotes />, to: '/HR/certificate' },
             // // { label: 'Company WO', icon: <FaShoppingCart />, to: '/HR/companyWO' },
             // { label: 'Performance', icon: <MdOutlineSpeed />, to: '/HR/performance' },
